@@ -102,7 +102,7 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <span class="two-rows h4">
-                        Bill OReilly
+                        {{$book->author}}
                     </span>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>

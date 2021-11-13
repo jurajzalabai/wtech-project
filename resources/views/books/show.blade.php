@@ -64,7 +64,7 @@
             </form>
             <!--            <div class="col-4  d-flex justify-content-end">-->
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end ">
-                <button class="btn btn-orange px-md-2 py-1" onclick="location.href='login.html'" type="button">
+                <button class="btn btn-orange px-md-2 py-1" onclick="location.href={{route('login')}}" type="button">
                     <i class="fa fa-user fa-lg h5"></i>
                     Prihlásiť
                 </button>
@@ -102,7 +102,7 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <span class="two-rows h4">
-                        {{$book->author}}
+                        {{$book->author->name}}
                     </span>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>

@@ -21,6 +21,7 @@ class CreateBooksTable extends Migration
             $table->unsignedDecimal('price');
             $table->unsignedDecimal('rating')->nullable();
             $table->unsignedInteger('number_of_pages');
+            $table->unsignedInteger('sold_count');
             $table->text('description');
             $table->string('binding_type');
             $table->string('publisher');

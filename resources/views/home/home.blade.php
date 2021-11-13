@@ -119,12 +119,12 @@
         @foreach($latest as $book)
         <div class="product col-lg-2 col-md-3 col-4">
             <div class="book-cover w-100">
-                <a href="book_details.html">
+                <a href="{{ route('books.show', $book->id) }}">
                     <img src="{{asset($book->photo_path)}}" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
                 </a>
             </div>
             <div class="book-title w-100">
-                <a href="book_details.html">{{$book->title}}</a>
+                <a href="{{ route('books.show', $book->id) }}">{{$book->title}}</a>
             </div>
             <div class="author w-100">{{$book->author->name}}</div>
             <div class="book-price w-100">{{$book->price}}</div>
@@ -136,12 +136,12 @@
         @foreach($best_selling as $book)
             <div class="product col-lg-2 col-md-3 col-4">
                 <div class="book-cover w-100">
-                    <a href="book_details.html">
+                    <a href="{{ route('books.show', $book->id) }}">
                         <img src="{{asset($book->photo_path)}}" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
                     </a>
                 </div>
                 <div class="book-title w-100">
-                    <a href="book_details.html">{{$book->title}}</a>
+                    <a href="{{ route('books.show', $book->id) }}">{{$book->title}}</a>
                 </div>
                 <div class="author w-100">{{$book->author->name}}</div>
                 <div class="book-price w-100">{{$book->price}}</div>
@@ -153,11 +153,11 @@
     <div class="row mb-4 justify-content-center">
         <div class="col-md-3 col-sm-5 col-10 mx-3 notice d-flex my-2 py-2 justify-content-center">
             <i class="fa fa-book fa-2x my-auto"></i>
-            <span class="h5 my-auto mx-2">10 000 kníh v ponuke</span>
+            <span class="h5 my-auto mx-2">{{$book_count}} kníh v ponuke</span>
         </div>
         <div class="col-md-3 col-sm-5 col-10 mx-3 notice d-flex my-2 py-2 justify-content-center">
             <i class="fa fa-cubes fa-2x my-auto"></i>
-            <span class="h5 my-auto mx-2">8 231 kníh na sklade</span>
+            <span class="h5 my-auto mx-2">{{$book_active_count}} kníh na sklade</span>
         </div>
         <div class="col-md-3 col-sm-5 col-10 mx-3 notice d-flex my-2 py-2 justify-content-center">
             <i class="fa fa-truck fa-2x my-auto"></i>

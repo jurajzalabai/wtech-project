@@ -1,4 +1,3 @@
-
 <footer>
     <div class="row mt-5 py-3 mx-0" style="background-color: #111417">
         <div class="col-3 col-md-2">

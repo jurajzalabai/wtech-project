@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Database\Seeders\Book;
 use Illuminate\Http\Request;
+use App\Models\Book;
 
 class BookController extends Controller
 {

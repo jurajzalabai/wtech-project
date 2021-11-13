@@ -1,15 +1,5 @@
-@extends('app.blade')
-@section('head')
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Detail Knihy</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="{{asset('css/book_details_stylesheet.css') }}" rel="stylesheet">
-    </head>
-@endsection
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -74,7 +64,7 @@
             </form>
             <!--            <div class="col-4  d-flex justify-content-end">-->
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end ">
-                <button class="btn btn-orange px-md-2 py-1" onclick="location.href='login.html'" type="button">
+                <button class="btn btn-orange px-md-2 py-1" onclick="location.href={{route('login')}}" type="button">
                     <i class="fa fa-user fa-lg h5"></i>
                     Prihlásiť
                 </button>
@@ -112,7 +102,7 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <span class="two-rows h4">
-                        Bill OReilly
+                        {{$book->author->name}}
                     </span>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -121,7 +111,7 @@
                     <i class="fa fa-star"></i>
                     <br>
                     <span class="h3">
-                        13.99 €
+                        {{$book->price}} €
                     </span>
                 </div>
 
@@ -146,7 +136,7 @@
                     </div>
                     <div  class="d-flex justify-content-center">
                         <button class="mt-3 btn basic-button" onclick="location.href='#'" type="button">
-                            <i class="fa fa-shopping-cart"></i>   Pridať do košíka</button>
+                            <i class="fa fa-shopping-cart"></i> Pridať do košíka</button>
                     </div>
                 </div>
             </div>
@@ -156,13 +146,7 @@
         <h2 class="mt-4">Popis</h2>
         <div class="p-3 ">
             <p class="thirteen-rows mb-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc dui. Vivamus nulla ligula,
-                porttitor sed dui sit amet, imperdiet lobortis purus. Pellentesque augue est, euismod id metus nec,
-                tincidunt semper elit. Sed dapibus lectus porta nisi mattis, eu rutrum mi porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc dui. Vivamus nulla ligula,
-                porttitor sed dui sit amet, imperdiet lobortis purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc dui. Vivamus nulla ligula,
-                porttitor sed dui sit amet, imperdiet lobortis purus. Pellentesque augue est, euismod id metus nec,
-                tincidunt semper elit. Sed dapibus lectus porta nisi mattis, eu rutrum mi porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nunc dui. Vivamus nulla ligula,
-                porttitor sed dui sit amet, imperdiet lobortis purus.
+                {{$book->description}}
             </p>
             <div class="d-flex justify-content-center pt-3">
                 <button class="btn basic-button" onclick="location.href='#'" type="button"><b>Zobraziť viac</b></button>
@@ -173,14 +157,14 @@
         <h2>Detaily</h2>
         <div class=" p-3 row">
             <div class="col-12 col-sm-6">
-                Dátum vydania:<br>
-                Väzba:<br>
-                Počet strán:
+                Dátum vydania: {{$book->publish_date}}<br>
+                Väzba:{{$book->binding_type}}<br>
+                Počet strán: {{$book->page_number}}
             </div>
             <div class="col-12 col-sm-6">
-                Čas čítania:<br>
-                Vydavateľstvo:<br>
-                Jazyk:
+                Čas čítania: {{$book->reading_time}}<br>
+                Vydavateľstvo:{{$book->publisher}}<br>
+                Jazyk:{{$book->language}}
             </div>
         </div>
     </section>

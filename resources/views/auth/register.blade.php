@@ -26,6 +26,34 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
+            <!-- City -->
+            <div class="mt-4">
+                <x-label for="city" :value="__('City')" />
+
+                <x-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required />
+            </div>
+
+            <!-- Phone number -->
+            <div class="mt-4">
+                <x-label for="phone_number" :value="__('Phone number')" />
+
+                <x-input id="phone_number" class="block mt-1 w-full" type="tel" name="phone_number" :value="old('phone_number')" required />
+            </div>
+
+            <!-- Postal code -->
+            <div class="mt-4">
+                <x-label for="postal_code" :value="__('Postal code')" />
+
+                <x-input id="postal_code" class="block mt-1 w-full" type="text" name="postal_code" :value="old('postal_code')" required />
+            </div>
+
+            <!-- Street -->
+            <div class="mt-4">
+                <x-label for="street" :value="__('Street')" />
+
+                <x-input id="street" class="block mt-1 w-full" type="text" name="street" :value="old('street')" required />
+            </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />

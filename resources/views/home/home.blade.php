@@ -116,156 +116,37 @@
 
     <section class="row col-gap">
         <h2><a href="listing.html">Najpredávanejšie</a></h2>
+        @foreach($latest as $book)
         <div class="product col-lg-2 col-md-3 col-4">
             <div class="book-cover w-100">
                 <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
+                    <img src="{{asset($book->photo_path)}}" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
                 </a>
             </div>
             <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot  </a>
+                <a href="book_details.html">{{$book->title}}</a>
             </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
+            <div class="author w-100">{{$book->author->name}}</div>
+            <div class="book-price w-100">{{$book->price}}</div>
         </div>
-
-        <div class="product col-lg-2 col-md-3 col-4">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot</a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-        <div class="product col-lg-2 col-md-3 col-4">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-        <div class="product col-lg-2 col-md-3 col-4">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-        <div class="product col-lg-2 col-md-3 col-4 ">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-        <div class="product col-lg-2 col-md-3 col-4 ">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-
+        @endforeach
     </section>
     <section class="row my-5">
         <h2><a href="listing.html">Najnovšie</a></h2>
-        <div class="product col-lg-2 col-md-3 col-4">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
+        @foreach($best_selling as $book)
+            <div class="product col-lg-2 col-md-3 col-4">
+                <div class="book-cover w-100">
+                    <a href="book_details.html">
+                        <img src="{{asset($book->photo_path)}}" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
+                    </a>
+                </div>
+                <div class="book-title w-100">
+                    <a href="book_details.html">{{$book->title}}</a>
+                </div>
+                <div class="author w-100">{{$book->author->name}}</div>
+                <div class="book-price w-100">{{$book->price}}</div>
             </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot  </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-
-        <div class="product col-lg-2 col-md-3 col-4">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot</a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-        <div class="product col-lg-2 col-md-3 col-4">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-        <div class="product col-lg-2 col-md-3 col-4">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-        <div class="product col-lg-2 col-md-3 col-4 ">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
-        <div class="product col-lg-2 col-md-3 col-4 ">
-            <div class="book-cover w-100">
-                <a href="book_details.html">
-                    <img src="img/book120px.png" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">
-                </a>
-            </div>
-            <div class="book-title w-100">
-                <a href="book_details.html">Karel Gott - Umelecky a soukromy zivot </a>
-            </div>
-            <div class="author w-100">Bill O'reily</div>
-            <div class="book-price w-100">21.43</div>
-        </div>
+        @endforeach
     </section>
 
 

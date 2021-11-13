@@ -1,6 +1,6 @@
 <header class="navbar navbar-expand-md navbar-dark sticky-md-top top-nav">
     <div class="container-lg">
-        <a href="index.html" class="navbar-brand">
+        <a  href="{{ route('home')}}" class="navbar-brand">
             <img src="{{asset('img/whitelogo3.png')}}" alt="BookStore logo" class="logo">
         </a>
 

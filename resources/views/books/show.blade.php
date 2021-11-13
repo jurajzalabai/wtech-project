@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('css-stylesheet')
-    <link href="{{asset('css/main_pages_stylesheet.css') }}" rel="stylesheet">
+    <link href="{{asset('css/book_details_stylesheet.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
     <div class="d-flex flex-row  my-5 py-3 px-4 rounded-pill" style="background-color:#ed8e00">
         <nav aria-label="breadcrumb">
             <ol class=" my-auto breadcrumb">
-                <li class="breadcrumb-item"><a  style="color: black;" href={{route('dashboard')}}>Home</a></li>
+                <li class="breadcrumb-item"><a  style="color: black;" href={{route('home')}}>Home</a></li>
                 <li class="breadcrumb-item"><a  style="color: black;" href="#">Library</a></li>
                 <li class="breadcrumb-item"><a  style="color: black;" href="#">Beletria</a></li>
                 <li class="breadcrumb-item active"  style="color: blue;" aria-current="page">Kniha - Karel Gott</li>

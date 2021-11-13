@@ -1,12 +1,12 @@
 <section class="row product-listing mx-1">
     <div class="col-4 col-sm-2 m-auto text-center p-0">
-        <a href="book_details.html">
+        <a href={{route('books.show', $book->id)}}>
             <img src="{{asset($book->photo_path)}}" alt="Karel Gott - umelecky a soukromy zivot kniha" class="img-fluid">
         </a>
     </div>
     <div class="col-8 col-sm-7 pe-0">
         <h2 class="book-title-listings">
-            <a href="book_details.html">
+            <a href={{route('books.show', $book->id)}}>
                 {{$book->title}}
             </a>
         </h2>

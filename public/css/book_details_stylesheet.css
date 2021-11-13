@@ -1,0 +1,177 @@
+*{
+    /*border-style: solid;*/
+    /*margin: 0 !important;*/
+    /*border: solid white 1px;*/
+}
+
+
+
+header.top-nav{
+    background-color: #111417;
+}
+
+.dropdown-large {
+    margin-left: -5vw;
+    min-width: 85vw;
+}
+
+#navbar-menu>div{
+    padding: 0;
+}
+
+.dropdown li {
+    list-style-type: none;
+}
+.dropdown li a{
+    text-decoration: none;
+    color: black;
+    margin-top: 1em;
+    margin-left: 2rem;
+}
+
+.dropdown li a::before{
+    content: ' • ';
+}
+
+.dropdown li a.h5::before{
+    content: none;
+}
+
+.dropdown li a.h5{
+    list-style-type: none;
+}
+
+header a.dropdown-toggle{
+    color: #ed8e00;
+}
+header a.dropdown-toggle:hover{
+    color: #ffb259;
+}
+
+button.btn-orange{
+    background-color: #ed8e00;
+    color: #111417;
+}
+
+button.btn-orange:hover{
+    background-color: #ffb259;
+}
+
+
+@media (max-width: 768px) {
+    .dropdown-large {
+        min-width: 92vw;
+        margin-left: 0;
+    }
+
+    header div>div>button{
+        min-width: 60%;
+    }
+    .dropdown{
+        text-align: center;
+    }
+}
+
+header form{
+    margin: 0;
+}
+
+body{
+    background-image: url('../img/BG.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.book-main-info [class^="col"]{
+    padding: 0;
+}
+
+.basic-button{
+    background-color:#ed8e00;
+    border-radius: 50px;
+}
+
+.black-basic-button{
+    background-color: #111417;
+    color: #ed8e00;
+    border-radius: 50px;
+}
+
+#description-text{
+    padding: 50px;
+}
+
+#book-image{
+    width: auto;
+    height: 220px;
+}
+#description{
+    background-color: #ed8e00;
+}
+
+.three-rows{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    min-height: 3em;
+}
+
+.two-rows{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    min-height: 2em;
+}
+
+.thirteen-rows{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 13;
+}
+
+.row{
+    margin:0;
+    padding:0;
+}
+
+.div{
+    padding:0;
+    margin:0;
+}
+
+.block-text p{
+    background-color: #ffdea1;
+    border-radius: 10px;
+}
+
+.block-text div{
+    background-color: #ffdea1;
+    border-radius: 10px;
+}
+
+.review{
+    background-color: #c5e8ef;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.logo{
+    width: auto;
+    height: 50px;
+}
+
+.basic-button:hover{
+    background-color:#ffb259;
+}
+
+.black-basic-button:hover{
+    background-color:#ffb259;
+}

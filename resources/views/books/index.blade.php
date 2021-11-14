@@ -129,7 +129,7 @@
 
             </section>
             <div class="col-12 text-center d-block d-md-none my-2">
-                <button data-bs-toggle="collapse" data-bs-target="#side-menu" type="button" class="btn btn-orange">
+                <button id="show_filters" data-bs-toggle="collapse" data-bs-target="#side-menu" type="button" class="btn btn-orange">
                     <i class="fa fa-filter fa-lg"></i>
                     Zobraziť filtrovanie
                 </button>
@@ -142,12 +142,22 @@
                 <div class="col-auto my-auto d-flex px-0">
                     <div class="dropdown">
                         <button class="btn btn-orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            najlacnejšie
+                            @switch($order_by)
+                                @case('price_asc')
+                                    Najlacnejšie
+                                    @break
+                                @case('newest')
+                                    Najnovšie
+                                    @break
+                                @case('top_selling')
+                                    Najpredávanejšie
+                                    @break
+                            @endswitch
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><button class="dropdown-item">najlacnejšie</button></li>
-                            <li><button class="dropdown-item">najpredávanejšie</button></li>
-                            <li><button class="dropdown-item">najnovšie</button></li>
+                            <li><button class="dropdown-item" onclick="location.href='{{route('books.index',['order_by'=>'price_asc'])}}'">Najlacnejšie</button></li>
+                            <li><button class="dropdown-item" onclick="location.href='{{route('books.index',['order_by'=>'top_selling'])}}'">Najpredávanejšie</button></li>
+                            <li><button class="dropdown-item" onclick="location.href='{{route('books.index',['order_by'=>'newest'])}}'">Najnovšie</button></li>
                         </ul>
                     </div>
                 </div>
@@ -157,24 +167,9 @@
                 @include('components.book-product')
             @endforeach
 
-            <nav id="pagination" class="my-5">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
+
+            <nav class="my-5 d-flex justify-content-center">
+                {!! $books->links() !!}
             </nav>
         </section>
     </div>

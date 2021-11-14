@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Book;
+use App\Models\Review;
+use App\Models\Author;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 
@@ -16,9 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+            Author::factory()->count(1)->create();
 
-        Book::factory()->count(100)->create();
+            Book::factory()->count(100)->create();
+            Review::factory()->count(10)->create();
+
 
     }
 }

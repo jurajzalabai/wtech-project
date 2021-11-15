@@ -38,23 +38,35 @@
                     <li><a href="">Sci-fi, fantasy</a></li>
                 </ul>
 
-                <form action="#" method="get" class="price-filter">
-                    <label for="price-min">Cena od</label>
-                    <br>
-                    <input type="text" name="minimal-price" value="0" id="price-min">
-                    <br>
-                    <label for="price-max">Cena do</label>
-                    <br>
-                    <input type="text" name="maximum-price" value="125" id="price-max">
-                    <br>
-                    <button class="btn btn-orange my-2" type="submit">Filtrovať podľa ceny</button>
-                </form>
+                <h2 class="h3">Filtrovanie</h2>
+                <form action="{{route('books.index')}}" method="get" >
+                    <div class="price-filter">
+                        <label for="price-min">Cena od</label>
+                        <br>
+                        <input type="text" name="minimal_price" id="price-min"
+                            @if(isset($request['minimal_price']))
+                               value={{$request['minimal_price']}}
+                            @endif>
+                        <br>
+                        <label for="price-max">Cena do</label>
+                        <br>
+                        <input type="text" name="maximum_price" id="price-max"
+                            @if(isset($request['maximum_price']))
+                               value={{$request['maximum_price']}}
+                            @endif>
+
+                    </div>
+
 
                 <div class="check-boxes">
                     <section>
                         <h3 class="h5">Jazyk</h3>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="slovak-check-box">
+                            <input type="checkbox" name="slovak-language" class="form-check-input" id="slovak-check-box"
+                            @if(isset($request['slovak-language']))
+                                checked
+                            @endif
+                            >
                             <label for="slovak-check-box" class="form-check-label">
                                 Slovenský
                             </label>
@@ -62,7 +74,10 @@
                         </div>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="czech-check-box">
+                            <input type="checkbox" name="czech-language" class="form-check-input" id="czech-check-box"
+                            @if(isset($request['czech-language']))
+                                checked
+                            @endif>
                             <label for="czech-check-box" class="form-check-label">
                                 Český
                             </label>
@@ -70,7 +85,11 @@
                         </div>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="english-check-box">
+                            <input type="checkbox" name="english-language" class="form-check-input" id="english-check-box"
+                            @if(isset($request['english-language']))
+                               checked
+                            @endif>
+
                             <label for="english-check-box" class="form-check-label">
                                 Anglický
                             </label>
@@ -81,7 +100,10 @@
                     <section>
                         <h3 class="h5">Dostupnosť</h3>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="available-check-box">
+                            <input type="checkbox" name="available" class="form-check-input" id="available-check-box"
+                            @if(isset($request['available']))
+                               checked
+                            @endif>
                             <label for="available-check-box" class="form-check-label">
                                 Na sklade
                             </label>
@@ -89,7 +111,10 @@
                         </div>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="available-soon-check-box">
+                            <input type="checkbox" name="available-soon" class="form-check-input" id="available-soon-check-box"
+                            @if(isset($request['available-soon']))
+                                   checked
+                            @endif>
                             <label for="available-soon-check-box" class="form-check-label">
                                 Čoskoro dostupné
                             </label>
@@ -97,7 +122,10 @@
                         </div>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="unavailable-check-box">
+                            <input type="checkbox" name="unavailable" class="form-check-input" id="unavailable-check-box"
+                            @if(isset($request['unavailable']))
+                                   checked
+                            @endif>
                             <label for="unavailable-check-box" class="form-check-label">
                                 Vypredané
                             </label>
@@ -109,7 +137,10 @@
                     <section>
                         <h3 class="h5">Typ väzby</h3>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="hard-cover-check-box">
+                            <input type="checkbox" name="hard-cover" class="form-check-input" id="hard-cover-check-box"
+                            @if(isset($request['hard-cover']))
+                                   checked
+                            @endif>
                             <label for="hard-cover-check-box" class="form-check-label">
                                 Pevná väzba
                             </label>
@@ -117,15 +148,19 @@
                         </div>
 
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="soft-cover-check-box">
+                            <input type="checkbox" name="soft-cover" class="form-check-input" id="soft-cover-check-box"
+                            @if(isset($request['soft-cover']))
+                                checked
+                            @endif>
                             <label for="soft-cover-check-box" class="form-check-label">
                                 Mäkká väzba
                             </label>
 
                         </div>
-
                     </section>
                 </div>
+                    <button class="btn btn-orange my-2" type="submit">Filtrovať</button>
+                </form>
 
             </section>
             <div class="col-12 text-center d-block d-md-none my-2">
@@ -155,9 +190,9 @@
                             @endswitch
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><button class="dropdown-item" onclick="location.href='{{route('books.index',['order_by'=>'price_asc'])}}'">Najlacnejšie</button></li>
-                            <li><button class="dropdown-item" onclick="location.href='{{route('books.index',['order_by'=>'top_selling'])}}'">Najpredávanejšie</button></li>
-                            <li><button class="dropdown-item" onclick="location.href='{{route('books.index',['order_by'=>'newest'])}}'">Najnovšie</button></li>
+                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'price_asc']))}}'>Najlacnejšie</a></li>
+                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'top_selling']))}}'>Najpredávanejšie</a></li>
+                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'newest']))}}'>Najnovšie</a></li>
                         </ul>
                     </div>
                 </div>
@@ -169,7 +204,7 @@
 
 
             <nav class="my-5 d-flex justify-content-center">
-                {!! $books->links() !!}
+                {!! $books->appends(request()->input())->links() !!}
             </nav>
         </section>
     </div>

@@ -268,7 +268,7 @@ footer .row, nav .row{
 }
 
 
-form.price-filter input{
+form .price-filter input{
     max-width: 50%;
 }
 

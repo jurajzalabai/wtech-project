@@ -17,7 +17,7 @@
     </div>
     <div class="row book-main-info">
         <div class="col-md-3 col-12 d-flex d-md justify-content-center">
-            <img id="book-image" src="{{asset('img/book170px.png')}}" alt={{$book->title}}>
+            <img id="book-image" src="{{asset($book->photo_path)}}" alt={{$book->title}}>
         </div>
         <section  class="col-md-9 col-sm-12">
             <h1 class="pb-4 three-rows">
@@ -45,18 +45,28 @@
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="col-4 d-flex justify-content-end">
-                            <button class="btn basic-button" type="button">
+                            <button class="btn basic-button" onclick="minus_nop()" id="btn-minus" type="button">
                                 <i class="fa fa-minus"></i></button>
                         </div>
                         <div class="col-4 d-inline-flex justify-content-center">
                             <form >
-                                <input class="form-control  d-inline-flex rounded-pill" style="width: 80px" type="text">
+                                <input id="form_nop" value="1" class="text-center form-control d-inline-flex rounded-pill" style="width: 80px" type="text">
                             </form>
                         </div>
                         <div class="col-4">
-                            <button class="btn basic-button" type="button">
+                            <button onclick="plus_nop()" class="btn basic-button" type="button">
                                 <i class="fa fa-plus"></i></button>
                         </div>
+                        <script>
+                            function plus_nop() {
+                                document.getElementById("form_nop").value = Number(document.getElementById("form_nop").value) + 1;
+                            }
+                            function minus_nop() {
+                                if (Number(document.getElementById("form_nop").value) > 1) {
+                                    document.getElementById("form_nop").value = Number(document.getElementById("form_nop").value) - 1;
+                                }
+                            }
+                        </script>
                     </div>
                     <div  class="d-flex justify-content-center">
                         <button class="mt-3 btn basic-button" onclick="location.href='#'" type="button">
@@ -69,12 +79,25 @@
     <section class="block-text mt-3">
         <h2 class="mt-4">Popis</h2>
         <div class="p-3 ">
-            <p class="thirteen-rows mb-0">
-                {{$book->description}}
+            <p id="book_description" class="mb-0 thirteen-rows">
+                {{$book->description}} {{$book->description}} {{$book->description}}  {{$book->description}} {{$book->description}}{{$book->description}} {{$book->description}} {{$book->description}}
             </p>
             <div class="d-flex justify-content-center pt-3">
-                <button class="btn basic-button" onclick="location.href='#'" type="button"><b>Zobraziť viac</b></button>
+                <button id="show_more_button" class="btn basic-button" onclick="show_more()" type="button" style="font-weight: bold">Zobraziť viac</button>
             </div>
+            <script>
+                function show_more() {
+                    if (document.getElementById("book_description").classList.item(1) == "thirteen-rows") {
+                        document.getElementById("book_description").classList.remove("thirteen-rows");
+                        document.getElementById("show_more_button").innerText = "Zobraziť menej";
+                    }
+                    else{
+                        document.getElementById("book_description").classList.add("thirteen-rows")
+                        document.getElementById("show_more_button").innerText = "Zobraziť viac";
+
+                    }
+                }
+            </script>
         </div>
     </section>
     <section class="block-text mt-3">
@@ -101,12 +124,24 @@
                 @for ($i = 1; $i <= $review->rating; $i++)
                     <i class="fa fa-star"></i>
                 @endfor
-                <p class="three-rows">{{$review->review_text}}</p>
-                <button class="btn basic-button" onclick="location.href='#'" type="button"><b>Zobraziť viac</b></button>
+                <p id="review{{$review->id}}" class="three-rows">{{$review->id}}{{$review->review_text}}{{$review->review_text}}{{$review->review_text}}</p>
+                <button id="review_button{{$review->id}}" class="btn basic-button" onclick="show_more_review{{$review->id}}()" type="button" style="font-weight: bold">Zobraziť viac</button>
+                <script>
+                    function show_more_review{{$review->id}}() {
+                        if (document.getElementById("review{{$review->id}}").classList.item(1) == "three-rows") {
+                            document.getElementById("review{{$review->id}}").classList.remove("three-rows");
+                            document.getElementById("review_button{{$review->id}}").innerText = "Zobraziť menej";
+                        }
+                        else{
+                            document.getElementById("review{{$review->id}}").classList.add("three-rows")
+                            document.getElementById("review_button{{$review->id}}").innerText = "Zobraziť viac";
+                        }
+                    }
+                </script>
             </div>
             @endforeach
             <div class="d-flex justify-content-center" style="background: none">
-                <button class="btn basic-button" onclick="location.href='#'" type="button"><b>Zobraziť viac</b></button>
+                <button class="btn basic-button" onclick="show_more_reviews()" type="button"><b>Zobraziť viac</b></button>
             </div>
         </div>
     </section>

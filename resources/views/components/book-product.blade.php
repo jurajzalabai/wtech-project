@@ -1,7 +1,7 @@
 <section class="row product-listing mx-1">
     <div class="col-4 col-sm-2 m-auto text-center p-0">
         <a href={{route('books.show', $book->id)}}>
-            <img src="{{asset($book->photo_path)}}" alt="Karel Gott - umelecky a soukromy zivot kniha" class="img-fluid">
+            <img src="{{asset($book->photo_path)}}" alt="{{$book->title}} kniha" class="img-fluid">
         </a>
     </div>
     <div class="col-8 col-sm-7 pe-0">
@@ -24,9 +24,13 @@
                 <i class="fa fa-star"></i>
             </div>
         </div>
-        <button class="btn btn-orange add-to-shopping-cart mt-auto">
-            <i class="fa fa-shopping-cart fa-md h5"></i>
-            Pridať do košíka
-        </button>
+        <form action={{route('cart.store')}} method="POST">
+            {{csrf_field()}}
+            <input type="hidden" name="id" value={{ $book->id }}>
+            <button type="submit" class="btn btn-orange add-to-shopping-cart mt-auto">
+                <i class="fa fa-shopping-cart fa-md h5"></i>
+                Pridať do košíka
+            </button>
+        </form>
     </div>
 </section>

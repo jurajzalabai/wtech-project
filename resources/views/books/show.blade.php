@@ -38,7 +38,9 @@
                         {{$book->price}} €
                     </span>
                 </div>
-
+                <form method="POST" action="{{route('cart.store')}}">
+                    {{csrf_field()}}
+                    <input type="hidden" name="id" value={{ $book->id }}>
                 <div class="col-12 col-md-6">
                     <div class="d-flex justify-content-center">
                         Počet kusov:
@@ -49,9 +51,7 @@
                                 <i class="fa fa-minus"></i></button>
                         </div>
                         <div class="col-4 d-inline-flex justify-content-center">
-                            <form >
-                                <input id="form_nop" value="1" class="text-center form-control d-inline-flex rounded-pill" style="width: 80px" type="text">
-                            </form>
+                                <input name="quantity" id="form_nop" value="1" class="text-center form-control d-inline-flex rounded-pill" style="width: 80px" type="text">
                         </div>
                         <div class="col-4">
                             <button onclick="plus_nop()" class="btn basic-button" type="button">
@@ -69,10 +69,12 @@
                         </script>
                     </div>
                     <div  class="d-flex justify-content-center">
-                        <button class="mt-3 btn basic-button" onclick="location.href='#'" type="button">
+
+                        <button class="mt-3 btn basic-button" type="submit">
                             <i class="fa fa-shopping-cart"></i> Pridať do košíka</button>
                     </div>
                 </div>
+                </form>
             </div>
         </section>
     </div>
@@ -118,31 +120,53 @@
     <section class="mt-3">
         <h2>Recenzie</h2>
         <div class="block-text p-3" style="background-color: #e8d2b7; border-radius: 10px">
-            @foreach($reviews as $review)
-            <div class="review">
+            @foreach($reviews as $k=>$review)
+            <div class="review @if($k>=2) collapse @endif">
                 <h3 class="mt-2 h5">{{$review->username}}</h3>
                 @for ($i = 1; $i <= $review->rating; $i++)
                     <i class="fa fa-star"></i>
                 @endfor
-                <p id="review{{$review->id}}" class="three-rows">{{$review->id}}{{$review->review_text}}{{$review->review_text}}{{$review->review_text}}</p>
-                <button id="review_button{{$review->id}}" class="btn basic-button" onclick="show_more_review{{$review->id}}()" type="button" style="font-weight: bold">Zobraziť viac</button>
-                <script>
-                    function show_more_review{{$review->id}}() {
-                        if (document.getElementById("review{{$review->id}}").classList.item(1) == "three-rows") {
-                            document.getElementById("review{{$review->id}}").classList.remove("three-rows");
-                            document.getElementById("review_button{{$review->id}}").innerText = "Zobraziť menej";
-                        }
-                        else{
-                            document.getElementById("review{{$review->id}}").classList.add("three-rows")
-                            document.getElementById("review_button{{$review->id}}").innerText = "Zobraziť viac";
-                        }
-                    }
-                </script>
+                <p id="review{{$review->id}}" class="">{{$review->review_text}}{{$review->review_text}}{{$review->review_text}}</p>
+                <button class="review-button btn basic-button" type="button" style="font-weight: bold">Zobraziť viac</button>
             </div>
             @endforeach
             <div class="d-flex justify-content-center" style="background: none">
-                <button class="btn basic-button" onclick="show_more_reviews()" type="button"><b>Zobraziť viac</b></button>
+                <button class="btn basic-button" id="show_reviews_button" onclick="change_text_button()" data-bs-toggle="collapse" data-bs-target=".review.collapse" style="font-weight: bold" type="button">Zobraziť viac</button>
             </div>
         </div>
     </section>
+    <script>
+        // document.getElementsByClassName("review-button").addEventListener("click", nieco);
+        function change_text_button(){
+            if (document.getElementById("show_reviews_button").innerText == "Zobraziť viac") {
+                    document.getElementById("show_reviews_button").innerText = "Zobraziť menej";
+                }
+                else{
+                    document.getElementById("show_reviews_button").innerText = "Zobraziť viac";
+                }
+        }
+
+        // function nieco(e) {
+            // console.log(ev.parent);
+
+            // var ev = e || window.event;
+            // console.log(ev);
+            // if ( ev.innerText === "Zobraziť viac"){
+            //     ev.parent.getElementsByTagName("p")[0].classList.remove("three-rows");
+            // }
+            // else{
+
+            // }
+            // if (document.getElementById("review").classList.item(1) == "three-rows") {
+            //     document.getElementById("review").classList.remove("three-rows");
+            //     document.getElementById("review_button").innerText = "Zobraziť menej";
+            // }
+            // else{
+            //     document.getElementById("review").classList.add("three-rows")
+            //     document.getElementById("review_button").innerText = "Zobraziť viac";
+            // }
+        // }
+    </script>
 @endsection
+
+

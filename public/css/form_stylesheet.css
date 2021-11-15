@@ -1,0 +1,235 @@
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+
+body{
+    background-image: url('../../../../MAIN_PROJECT/xkabac_xzalabaij_projekt/wtech_project/img/BG.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.logo{
+    width: auto;
+    height: 50px;
+}
+
+.basic-button{
+    background-color:#ed8e00;
+    border-radius: 50px;
+}
+
+.black-basic-button{
+    background-color: #111417;
+    color: #ed8e00;
+    border-radius: 50px;
+}
+
+
+.sign-in{
+    padding: 50px;
+    /*padding-top: 50px;*/
+    /*padding-right: 50px;*/
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: 300px;
+    margin-right: 300px;
+    border: solid black 2px;
+    border-radius: 40px;
+
+    background-color: white;
+
+}
+
+@media (max-width: 1200px) {
+    .sign-in {
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+}
+
+@media (max-width: 800px) {
+    .sign-in {
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 0px;
+        padding-left: 20px;
+        padding-top: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .sign-in {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-right: 10px;
+    }
+}
+
+.delivery-details{
+    padding-left: 100px;
+    padding-top: 50px;
+    padding-right: 100px;
+    margin-top: 30px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border: solid black 2px;
+    border-radius: 40px;
+
+    background-color: white;
+}
+
+@media (max-width: 1200px) {
+    .delivery-details {
+        margin-top: 30px;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+@media (max-width: 750px) {
+    .delivery-details {
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-top: 0px;
+        padding-left: 20px;
+        padding-top: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .delivery-details {
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-right: 10px;
+    }
+}
+
+header.top-nav{
+    background-color: #111417;
+}
+
+.dropdown-large {
+    margin-left: -5vw;
+    min-width: 85vw;
+}
+
+#navbar-menu>div{
+    padding: 0;
+}
+
+.dropdown li {
+    list-style-type: none;
+}
+.dropdown li a{
+    text-decoration: none;
+    color: black;
+    margin-top: 1em;
+    margin-left: 2rem;
+}
+
+.dropdown li a::before{
+    content: ' • ';
+}
+
+.dropdown li a.h5::before{
+    content: none;
+}
+
+.dropdown li a.h5{
+    list-style-type: none;
+}
+
+header a.dropdown-toggle{
+    color: #ed8e00;
+}
+header a.dropdown-toggle:hover{
+    color: #ffb259;
+}
+
+button.btn-orange{
+    background-color: #ed8e00;
+    color: #111417;
+}
+
+button.btn-orange:hover{
+    background-color: #ffb259;
+}
+
+
+@media (max-width: 768px) {
+    .dropdown-large {
+        min-width: 92vw;
+        margin-left: 0;
+    }
+
+    header div>div>button{
+        min-width: 60%;
+    }
+    .dropdown{
+        text-align: center;
+    }
+}
+
+header form{
+    margin: 0;
+}
+
+.basic-button:hover{
+     background-color:#ffb259;
+ }
+
+.black-basic-button:hover{
+    background-color:#ffb259;
+}
+
+.first-column{
+    border-right: 1px solid black;
+    height: 300px;
+}
+
+.main-container{
+    padding-top: 5vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
+@media (max-width: 720px) {
+    .main-container {
+        padding: 0;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-container {
+        margin: 0;
+    }
+}
+
+@media (max-width: 990px) {
+
+    .first-column{
+        border-right: none;
+    }
+}
+
+.payment-delivery-footer{
+    margin-top: 100px;
+}
+
+.product-listing a>img{
+    width: 80px;
+    height: auto;
+}

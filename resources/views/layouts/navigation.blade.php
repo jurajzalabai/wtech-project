@@ -49,10 +49,16 @@
                 <button class="btn btn-orange" type="submit">Hľadať</button>
             </form>
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end ">
-                <button class="btn btn-orange px-md-2 py-1" onclick="location.href='login.html'" type="button">
+                @if (!Auth::check()){
+                <button class="btn btn-orange px-md-2 py-1" onclick="location.href='{{ route('loginak')}}'" type="button">
                     <i class="fa fa-user fa-lg h5"></i>
                     Prihlásiť
+                </button>}
+                @else  <button class="btn btn-orange px-md-2 py-1" onclick="location.href='{{ route('logout')}}'" type="button">
+                    <i class="fa fa-user fa-lg h5"></i>
+                    Odhlásiť
                 </button>
+                    @endif
             </div>
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end">
                 <button class="btn btn-orange py-1 me-md-1" onclick="location.href='{{route('cart.index')}}}'" type="button">

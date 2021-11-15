@@ -14,6 +14,5 @@ class HomeController extends Controller
             $book_count =  Book::count();
             $book_active_count =  Book::where('active', true)->count();
             return view('home.home', ['latest'=>$latest, 'best_selling'=>$best_selling, 'book_count'=>$book_count, 'book_active_count'=>$book_active_count]);
-
     }
 }

@@ -55,7 +55,7 @@
                 </button>
             </div>
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end">
-                <button class="btn btn-orange py-1 me-md-1" onclick="location.href='shopping_cart.html'" type="button">
+                <button class="btn btn-orange py-1 me-md-1" onclick="location.href='{{route('cart.index')}}}'" type="button">
                     <i class="fa fa-shopping-cart fa-lg h5"></i>
                     Košík
                 </button>

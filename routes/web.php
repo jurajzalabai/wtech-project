@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShoppingCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,12 @@ Route::resource('books', BookController::class);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+//Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart.index');
+//Route::post('/cart', [ShoppingCartController::class, 'store'])->name('cart.store');
+Route::resource('cart', ShoppingCartController::class);
+
+Route::put('cart/increment/{book}', [ShoppingCartController::class, 'incrementQuantity'])->name('cart.increment');
+Route::put('cart/decrement/{book}', [ShoppingCartController::class, 'decrementQuantity'])->name('cart.decrement');
 
 
 require __DIR__.'/auth.php';

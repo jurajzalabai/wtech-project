@@ -2,7 +2,7 @@
     <div class="row mt-5 py-3 mx-0" style="background-color: #111417">
         <div class="col-3 col-md-2">
             <a class="navbar-brand"  href="{{ route('home')}}">
-                <img src="../xkabac_xzalabaij_project/wtech-project/public/img/whitelogo3.png" alt="BookStore logo" class="logo">
+                <img src="../img/whitelogo3.png" alt="BookStore logo" class="logo">
             </a>
         </div>
         <div class="col-9 col-md-10">

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
@@ -20,6 +22,8 @@ use App\Http\Controllers\ShoppingCartController;
 Route::resource('books', BookController::class);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('loginak', [LoginController::class, 'index'])->name('loginak');
+Route::get('registrak', [RegistrationController::class, 'index'])->name('registrak');
 
 //Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart.index');
 //Route::post('/cart', [ShoppingCartController::class, 'store'])->name('cart.store');

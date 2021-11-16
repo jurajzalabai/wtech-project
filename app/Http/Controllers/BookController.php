@@ -9,7 +9,7 @@ use App\Models\Book;
 class BookController extends Controller
 {
     public function show(Book $book){
-        $reviews =  Review::where('book_id', $book->id)->take(4)->get();
+        $reviews =  Review::where('book_id', $book->id)->get();
         return view('books.show', ['reviews'=>$reviews, 'book'=>$book]);
     }
 

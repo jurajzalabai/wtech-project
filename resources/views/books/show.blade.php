@@ -8,8 +8,8 @@
     <div class="d-flex flex-row  my-5 py-3 px-4 rounded-pill" style="background-color:#ed8e00">
         <nav aria-label="breadcrumb">
             <ol class=" my-auto breadcrumb">
-                <li class="breadcrumb-item"><a  style="color: black;" href={{route('home')}}>Home</a></li>
-                <li class="breadcrumb-item"><a  style="color: black;" href="#">Library</a></li>
+                <li class="breadcrumb-item"><a  style="color: black;" href={{route('home')}}>Domov</a></li>
+                <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books')}}">Knihy</a></li>
                 <li class="breadcrumb-item"><a  style="color: black;" href="#">Beletria</a></li>
                 <li class="breadcrumb-item active"  style="color: blue;" aria-current="page">{{$book->title}}</li>
             </ol>
@@ -38,10 +38,10 @@
                         {{$book->price}} €
                     </span>
                 </div>
-                <form method="POST" action="{{route('cart.store')}}">
+                <form method="POST" class="col-12 col-md-6" action="{{route('cart.store')}}">
                     {{csrf_field()}}
                     <input type="hidden" name="id" value={{ $book->id }}>
-                <div class="col-12 col-md-6">
+{{--                <div class="col-12 col-md-6">--}}
                     <div class="d-flex justify-content-center">
                         Počet kusov:
                     </div>
@@ -73,7 +73,7 @@
                         <button class="mt-3 btn basic-button" type="submit">
                             <i class="fa fa-shopping-cart"></i> Pridať do košíka</button>
                     </div>
-                </div>
+{{--                </div>--}}
                 </form>
             </div>
         </section>
@@ -120,19 +120,26 @@
     <section class="mt-3">
         <h2>Recenzie</h2>
         <div class="block-text p-3" style="background-color: #e8d2b7; border-radius: 10px">
-            @foreach($reviews as $k=>$review)
-            <div class="review @if($k>=2) collapse @endif">
-                <h3 class="mt-2 h5">{{$review->username}}</h3>
-                @for ($i = 1; $i <= $review->rating; $i++)
-                    <i class="fa fa-star"></i>
-                @endfor
-                <p id="review{{$review->id}}" class="">{{$review->review_text}}{{$review->review_text}}{{$review->review_text}}</p>
-                <button class="review-button btn basic-button" type="button" style="font-weight: bold">Zobraziť viac</button>
-            </div>
-            @endforeach
-            <div class="d-flex justify-content-center" style="background: none">
-                <button class="btn basic-button" id="show_reviews_button" onclick="change_text_button()" data-bs-toggle="collapse" data-bs-target=".review.collapse" style="font-weight: bold" type="button">Zobraziť viac</button>
-            </div>
+            {{count(array($reviews))}}
+            @if(count(array($reviews)))
+                @foreach($reviews as $k=>$review)
+                <div class="review @if($k>=2) collapse @endif">
+                    <h3 class="mt-2 h5">{{$review->username}}</h3>
+                    @for ($i = 1; $i <= $review->rating; $i++)
+                        <i class="fa fa-star"></i>
+                    @endfor
+                    <p id="review{{$review->id}}" class="">{{$review->review_text}}{{$review->review_text}}{{$review->review_text}}</p>
+    {{--                <button class="review-button btn basic-button" type="button" style="font-weight: bold">Zobraziť viac</button>--}}
+                </div>
+                @endforeach
+                <div class="d-flex justify-content-center" style="background: none">
+                    <button class="btn basic-button" id="show_reviews_button" onclick="change_text_button()" data-bs-toggle="collapse" data-bs-target=".review.collapse" style="font-weight: bold" type="button">Zobraziť viac</button>
+                </div>
+            @else
+                <div class="d-flex justify-content-center">
+                    <h3 class="mt-2 h5">Žiande recenzie na zobrazenie</h3>
+                </div>
+            @endif
         </div>
     </section>
     <script>

@@ -49,19 +49,24 @@
                 <button class="btn btn-orange" type="submit">Hľadať</button>
             </form>
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end ">
-                @if (!Auth::check()){
+                @if (!Auth::check())
                 <button class="btn btn-orange px-md-2 py-1" onclick="location.href='{{ route('loginak')}}'" type="button">
                     <i class="fa fa-user fa-lg h5"></i>
                     Prihlásiť
-                </button>}
-                @else  <button class="btn btn-orange px-md-2 py-1" onclick="location.href='{{ route('logout')}}'" type="button">
-                    <i class="fa fa-user fa-lg h5"></i>
-                    Odhlásiť
                 </button>
-                    @endif
+                @else
+                    <div class="dropdown">
+                        <button class="btn-orange px-md-2 py-1 btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{Auth::user()->name}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="{{ route('logout')}}">Odhlásiť</a></li>
+                        </ul>
+                    </div>
+                @endif
             </div>
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end">
-                <button class="btn btn-orange py-1 me-md-1" onclick="location.href='{{route('cart.index')}}}'" type="button">
+                <button class="btn btn-orange py-1 me-md-1" onclick="location.href='{{route('cart.index')}}'" type="button">
                     <i class="fa fa-shopping-cart fa-lg h5"></i>
                     Košík
                 </button>

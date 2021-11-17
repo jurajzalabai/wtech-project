@@ -10,6 +10,6 @@ class LoginController extends Controller
     public function index()
     {
 
-        return view('auth.two');
+        return view('auth.login-main');
     }
 }

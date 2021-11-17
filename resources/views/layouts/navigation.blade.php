@@ -54,10 +54,21 @@
                     <i class="fa fa-user fa-lg h5"></i>
                     Prihlásiť
                 </button>
-                @else  <button class="btn btn-orange px-md-2 py-1" onclick="location.href='{{ route('logout')}}'" type="button">
-                    <i class="fa fa-user fa-lg h5"></i>
-                    Odhlásiť
-                </button>
+
+                @else
+
+                    <div class="dropdown text-center" style=" display: inline-flex;">
+                        <button class="btn-orange px-md-2 py-1 btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{Auth::user()->name}}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end btn-block"  aria-labelledby="dropdownMenuButton1">
+                            <li><a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a></li>
+                        </ul>
+
+{{--                        <button class="btn-orange"  aria-labelledby="dropdownMenuButton">--}}
+{{--                            <a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a>--}}
+{{--                        </button>--}}
+                    </div>
                 @endif
             </div>
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end">

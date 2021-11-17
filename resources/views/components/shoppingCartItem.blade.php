@@ -24,7 +24,7 @@
                     <i class="fa fa-minus"></i></button>
             </form>
             <form class="m-0 mx-2">
-                <input class="form-control d-inline-flex rounded-pill" value="{{$cart_item['quantity']}}" style="width: 80px" type="text">
+                <input class="text-center form-control d-inline-flex rounded-pill" value="{{$cart_item['quantity']}}" style="width: 80px" type="text">
             </form>
             <form method="post" action="{{ route('cart.increment', $cart_item['book_id']) }}">
                 @method('PUT')
@@ -50,8 +50,28 @@
                 <form action="{{route('cart.destroy', $cart_item['book_id'])}}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button class="mt-2 btn basic-button" type="submit" style="font-size: 1.7em; background-color: unset;" >
+                    <button class="mt-2 btn basic-button" data-bs-toggle="modal" data-bs-target="#confirmationPopup" type="button" style="font-size: 1.7em; background-color: unset;" >
                         <i class="fa fa-trash"></i></button>
+
+                    <div class="modal fade" id="confirmationPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Potvrdenie</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                   Naozaj chcete vymazať tento produkt z košíka ?
+                                </div>
+                                <div class="modal-footer d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                                    <button type="submit" class="btn btn-primary">Áno, chcem ho vymazať</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
         </div>

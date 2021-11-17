@@ -9,6 +9,6 @@ class RegistrationController extends Controller
     public function index()
     {
 
-        return view('auth.tworegistration');
+        return view('auth.registration-main');
     }
 }

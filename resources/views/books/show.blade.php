@@ -9,8 +9,11 @@
         <nav aria-label="breadcrumb">
             <ol class=" my-auto breadcrumb">
                 <li class="breadcrumb-item"><a  style="color: black;" href={{route('home')}}>Domov</a></li>
-                <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books')}}">Knihy</a></li>
-                <li class="breadcrumb-item"><a  style="color: black;" href="#">Beletria</a></li>
+                <li class="breadcrumb-item"><a  style="color: black;" href="{{route('home')}}">Knihy</a></li>
+                @if($book->category->parentCategory)
+                    <li class="breadcrumb-item"><a  style="color: black;" href="#">{{$book->category->parentCategory->name}}</a></li>
+                @endif
+                <li class="breadcrumb-item"><a  style="color: black;" href="#">{{$book->category->name}}</a></li>
                 <li class="breadcrumb-item active"  style="color: blue;" aria-current="page">{{$book->title}}</li>
             </ol>
         </nav>
@@ -120,8 +123,7 @@
     <section class="mt-3">
         <h2>Recenzie</h2>
         <div class="block-text p-3" style="background-color: #e8d2b7; border-radius: 10px">
-            {{count(array($reviews))}}
-            @if(count(array($reviews)))
+            @if((count($reviews)))
                 @foreach($reviews as $k=>$review)
                 <div class="review @if($k>=2) collapse @endif">
                     <h3 class="mt-2 h5">{{$review->username}}</h3>

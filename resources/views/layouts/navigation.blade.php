@@ -55,13 +55,18 @@
                     Prihlásiť
                 </button>
                 @else
-                    <div class="dropdown">
-                        <button class="btn-orange px-md-2 py-1 btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    <div class="dropdown text-center" style=" display: inline-flex;">
+                        <button class="btn-orange px-md-2 py-1 btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             {{Auth::user()->name}}
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{{ route('logout')}}">Odhlásiť</a></li>
+                        <ul class="dropdown-menu dropdown-menu-lg-end btn-block"  aria-labelledby="dropdownMenuButton1">
+                            <li><a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a></li>
                         </ul>
+
+{{--                        <button class="btn-orange"  aria-labelledby="dropdownMenuButton">--}}
+{{--                            <a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a>--}}
+{{--                        </button>--}}
                     </div>
                 @endif
             </div>

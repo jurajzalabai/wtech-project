@@ -18,11 +18,9 @@
 <body>
 
 @include('layouts.navigation')
-
 <main class="container-md px-0">
     @yield('content')
 </main>
-
 @include('layouts.footer')
 </body>
 </html>

@@ -16,16 +16,15 @@
 
         @if(!count($cart))
             <div class="h4 text-center my-auto align-middle pt-5" style="height: 12em">
-                <i>Nákupný košík je prázdny.</i>
+                Nákupný košík je prázdny.
             </div>
         @endif
 
+        @if(count($cart))
         <div class="justify-content-end d-flex">
-            <button class="btn basic-button" onclick="location.href='payment_delivery.html'" type="button"
-            @if(!count($cart))
-                disabled
-            @endif>
+            <button class="btn basic-button" onclick="location.href='payment_delivery.html'" type="button">
                 Pokračovať</button>
         </div>
+        @endif>
     </main>
 @endsection

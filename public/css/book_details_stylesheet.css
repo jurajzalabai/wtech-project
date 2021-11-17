@@ -22,18 +22,18 @@ header.top-nav{
 .dropdown li {
     list-style-type: none;
 }
-.dropdown li a{
+.dropdown-large li a{
     text-decoration: none;
     color: black;
     margin-top: 1em;
     margin-left: 2rem;
 }
 
-.dropdown li a::before{
+.dropdown-large li a::before{
     content: ' • ';
 }
 
-.dropdown li a.h5::before{
+.dropdown-large li a.h5::before{
     content: none;
 }
 

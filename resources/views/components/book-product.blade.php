@@ -1,7 +1,7 @@
 <section class="row product-listing mx-1">
     <div class="col-4 col-sm-2 m-auto text-center p-0">
         <a href={{route('books.show', $book->id)}}>
-            <img src="{{asset($book->photo_path)}}" alt="{{$book->title}} kniha" class="img-fluid">
+            <img src="{{asset($book->photo_path)}}" alt="{{$book->title}} kniha" class="img-fluid book-photo">
         </a>
     </div>
     <div class="col-8 col-sm-7 pe-0">

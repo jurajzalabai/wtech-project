@@ -287,4 +287,8 @@ body{
     background-size: cover;
 }
 
+img.book-photo{
+    height: 120px;
+    width: auto;
+}
 

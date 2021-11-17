@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<main class="container-md px-0">
     <div class="d-flex flex-row  my-5 py-3 px-4 rounded-pill" style="background-color:#ed8e00">
         <nav aria-label="breadcrumb">
             <ol class=" my-auto breadcrumb">
@@ -167,6 +168,7 @@
             // }
         // }
     </script>
+</main>
 @endsection
 
 

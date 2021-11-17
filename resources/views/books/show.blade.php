@@ -6,15 +6,15 @@
 
 @section('content')
 <main class="container-md px-0">
-    <div class="d-flex flex-row  my-5 py-3 px-4 rounded-pill" style="background-color:#ed8e00">
+    <div class="d-flex flex-row  my-2 py-2 px-3 rounded-pill" style="background-color:#ed8e00">
         <nav aria-label="breadcrumb">
             <ol class=" my-auto breadcrumb">
                 <li class="breadcrumb-item"><a  style="color: black;" href={{route('home')}}>Domov</a></li>
                 <li class="breadcrumb-item"><a  style="color: black;" href="{{route('home')}}">Knihy</a></li>
                 @if($book->category->parentCategory)
-                    <li class="breadcrumb-item"><a  style="color: black;" href="#">{{$book->category->parentCategory->name}}</a></li>
+                    <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books.index', ['category'=>$book->category->parentCategory->id])}}">{{$book->category->parentCategory->name}}</a></li>
                 @endif
-                <li class="breadcrumb-item"><a  style="color: black;" href="#">{{$book->category->name}}</a></li>
+                <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books.index', ['category'=>$book->category->id])}}">{{$book->category->name}}</a></li>
                 <li class="breadcrumb-item active"  style="color: blue;" aria-current="page">{{$book->title}}</li>
             </ol>
         </nav>

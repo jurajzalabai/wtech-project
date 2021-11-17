@@ -8,7 +8,6 @@ use App\Models\Book;
 class ShoppingCartController extends Controller
 {
     public function getCart(){
-//        session()->forget('cart');
         $cart = session()->get('cart');
         if($cart == null){
             $cart = [];

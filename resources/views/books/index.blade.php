@@ -7,13 +7,20 @@
 
 @section('content')
 <main class="container-md px-0">
-    <nav aria-label="breadcrumb" class="breadcrumb py-2 ps-3 m-2 rounded-pill">
-        <ol class="my-auto breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" style="color: blue;" aria-current="page"><a href="#">Beletria</a></li>
+    <div class="d-flex flex-row  my-2 py-2 px-3 rounded-pill" style="background-color:#ed8e00">
+    <nav aria-label="breadcrumb">
+        <ol class=" my-auto breadcrumb">
+            <li class="breadcrumb-item"><a  style="color: black;" href={{route('home')}}>Domov</a></li>
+            <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books.index')}}">Knihy</a></li>
+            @if(isset($category))
+                @if($category->parentCategory)
+                    <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books.index', ['category'=>$category->parentCategory->id])}}">{{$category->parentCategory->name}}</a></li>
+                @endif
+                <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books.index', ['category'=>$category->id])}}">{{$category->name}}</a></li>
+            @endif
         </ol>
     </nav>
+    </div>
     <div class="row mx-0">
         @include('components.side-menu')
 

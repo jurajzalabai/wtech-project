@@ -24,9 +24,9 @@
                 <i class="fa fa-star"></i>
             </div>
         </div>
-        <form action={{route('cart.store')}} method="POST">
+        <form  method="POST" action="{{route('cart.store')}}">
             {{csrf_field()}}
-            <input type="hidden" name="id" value={{ $book->id }}>
+            <input type="hidden" name="id" value="{{ $book->id }}">
             <button type="button" data-bs-toggle="modal" data-bs-target="#numberOfItemsPopup" class="btn btn-orange add-to-shopping-cart mt-auto">
                 <i class="fa fa-shopping-cart fa-md h5"></i>
                 Pridať do košíka

@@ -44,7 +44,7 @@
                 </div>
                 <form method="POST" class="col-12 col-md-6" action="{{route('cart.store')}}">
                     {{csrf_field()}}
-                    <input type="hidden" name="id" value={{ $book->id }}>
+                    <input type="hidden" name="id" value={{$book->id}}>
 {{--                <div class="col-12 col-md-6">--}}
                     <div class="d-flex justify-content-center">
                         Počet kusov:

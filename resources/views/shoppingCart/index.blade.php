@@ -10,21 +10,25 @@
         <h1>
             Nákupný košík
         </h1>
-        @foreach($cart as $cart_item)
-            @include('components.shoppingCartItem')
-        @endforeach
+        <form method="POST" action="{{route('shippingPayment')}}">
+            {{csrf_field()}}
+            @foreach($cart as $cart_item)
+                @include('components.shoppingCartItem')
+            @endforeach
 
-        @if(!count($cart))
-            <div class="h4 text-center my-auto align-middle pt-5" style="height: 12em">
-                Nákupný košík je prázdny.
+            @if(!count($cart))
+                <div class="h4 text-center my-auto align-middle pt-5" style="height: 12em">
+                    Nákupný košík je prázdny.
+                </div>
+            @endif
+
+            @if(count($cart))
+{{--                <input type="array" id="cart" name="cart" value="{{$cart}}" />--}}
+                <div class="justify-content-end d-flex">
+                <button class="btn basic-button" type="submit">
+                    Pokračovať</button>
             </div>
-        @endif
-
-        @if(count($cart))
-        <div class="justify-content-end d-flex">
-            <button class="btn basic-button" onclick="location.href='payment_delivery.html'" type="button">
-                Pokračovať</button>
-        </div>
-        @endif>
+            @endif
+        </form>
     </main>
 @endsection

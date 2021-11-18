@@ -10,7 +10,7 @@
         <h1>
             Nákupný košík
         </h1>
-        <form method="POST" action="{{route('shippingPayment')}}">
+        <form method="POST" action="{{route('shippingPayment.store')}}">
             {{csrf_field()}}
             @foreach($cart as $cart_item)
                 @include('components.shoppingCartItem')
@@ -23,7 +23,7 @@
             @endif
 
             @if(count($cart))
-{{--                <input type="array" id="cart" name="cart" value="{{$cart}}" />--}}
+                <input type="hidden" name="id" value="2">
                 <div class="justify-content-end d-flex">
                 <button class="btn basic-button" type="submit">
                     Pokračovať</button>

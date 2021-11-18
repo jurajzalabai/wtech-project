@@ -17,8 +17,11 @@ class ShippingPaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(Request $request): \Illuminate\Http\Response
     {
-        return redirect()->route('deliveryDetails.index', ['cart'=>$request]);
+        //
+        $cart = $this->getCart();
+        return redirect()->route('deliveryDetails.deliveryDetails', ['cart'=>$cart]);
+//        return view('deliveryDetails.deliveryDetails', ['cart'=>$cart]);
     }
 }

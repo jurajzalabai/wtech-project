@@ -68,4 +68,15 @@
         </section>
     </div>
 </main>
+
+<script>
+    function plus_nop(book_id) {
+        document.getElementById("form_nop".concat(book_id)).value = Number(document.getElementById("form_nop".concat(book_id)).value) + 1;
+    }
+    function minus_nop(book_id) {
+        if (Number(document.getElementById("form_nop".concat(book_id)).value) > 1) {
+            document.getElementById("form_nop".concat(book_id)).value = Number(document.getElementById("form_nop".concat(book_id)).value) - 1;
+        }
+    }
+</script>
 @endsection

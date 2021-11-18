@@ -24,19 +24,19 @@
                 <i class="fa fa-star"></i>
             </div>
         </div>
-        <form  method="POST" action="{{route('cart.store')}}">
+        <form action="{{route('cart.store')}}" method="POST">
             {{csrf_field()}}
-            <input type="hidden" name="id" value="{{ $book->id }}">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#numberOfItemsPopup" class="btn btn-orange add-to-shopping-cart mt-auto">
+            <input type="hidden" name="id" value={{ $book->id }}>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#numberOfItemsPopup{{$book->id}}" class="btn btn-orange add-to-shopping-cart mt-auto">
                 <i class="fa fa-shopping-cart fa-md h5"></i>
                 Pridať do košíka
             </button>
 
-            <div class="modal fade" id="numberOfItemsPopup" tabindex="-1" aria-labelledby="numberOfItemsLabel" aria-hidden="true">
+            <div class="modal fade" id="numberOfItemsPopup{{$book->id}}" tabindex="-1" aria-labelledby="numberOfItemsLabel{{$book->id}}" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="numberOfItemsLabel">Pridať do košíka</h5>
+                            <h5 class="modal-title" id="numberOfItemsLabel{{$book->id}}">Pridať do košíka</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -45,26 +45,16 @@
                                     Počet kusov:
                                 </div>
                                 <div class="col-3 d-flex justify-content-end">
-                                    <button class="btn basic-button" onclick="minus_nop()" id="btn-minus" type="button">
+                                    <button class="btn basic-button" onclick="minus_nop({{$book->id}})" type="button">
                                         <i class="fa fa-minus"></i></button>
                                 </div>
                                 <div class="col-3 d-inline-flex justify-content-center">
-                                    <input name="quantity" id="form_nop" value="1" class="text-center form-control d-inline-flex rounded-pill" style="width: 80px" type="text">
+                                    <input name="quantity" id="form_nop{{$book->id}}" value="1" class="text-center form-control d-inline-flex rounded-pill" style="width: 80px" type="text">
                                 </div>
                                 <div class="col-4 d-flex justify-content-start">
-                                    <button onclick="plus_nop()" class="btn basic-button" type="button">
+                                    <button onclick="plus_nop({{$book->id}})" class="btn basic-button" type="button">
                                         <i class="fa fa-plus"></i></button>
                                 </div>
-                                <script>
-                                    function plus_nop() {
-                                        document.getElementById("form_nop").value = Number(document.getElementById("form_nop").value) + 1;
-                                    }
-                                    function minus_nop() {
-                                        if (Number(document.getElementById("form_nop").value) > 1) {
-                                            document.getElementById("form_nop").value = Number(document.getElementById("form_nop").value) - 1;
-                                        }
-                                    }
-                                </script>
                             </div>
 
                         </div>
@@ -75,9 +65,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </form>
     </div>
 </section>

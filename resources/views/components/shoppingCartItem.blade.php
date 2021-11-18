@@ -50,14 +50,14 @@
                 <form action="{{route('cart.destroy', $cart_item['book_id'])}}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button class="mt-2 btn basic-button" data-bs-toggle="modal" data-bs-target="#confirmationPopup" type="button" style="font-size: 1.7em; background-color: unset;" >
+                    <button class="mt-2 btn basic-button" data-bs-toggle="modal" data-bs-target="#confirmationPopup{{$cart_item['book_id']}}" type="button" style="font-size: 1.7em; background-color: unset;" >
                         <i class="fa fa-trash"></i></button>
 
-                    <div class="modal fade" id="confirmationPopup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="confirmationPopup{{$cart_item['book_id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Potvrdenie</h5>
+                                    <h5 class="modal-title">Potvrdenie</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">

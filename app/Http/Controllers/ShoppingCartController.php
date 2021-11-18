@@ -2,17 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\User;
 
 class ShoppingCartController extends Controller
 {
     public function getCart(){
-        $cart = session()->get('cart');
-        if($cart == null){
-            $cart = [];
+        if(Auth::user()){
+            $user = User::find(Auth::id());
+            if(isset($user->cart)){
+                $cart = unserialize($user->cart);
+            }
+            else {
+                $cart = [];
+            }
         }
+        else {
+            $cart = session()->get('cart');
+            if ($cart == null) {
+                $cart = [];
+            }
+        }
+
         return $cart;
+    }
+
+    public function storeCart($old_cart){
+        if(Auth::user()){
+            $user = User::find(Auth::id());
+            $user->cart = serialize($old_cart);
+            $user->save();
+        }
+        else {
+            session()->put('cart', $old_cart);
+        }
+
     }
 
     /**
@@ -45,6 +71,8 @@ class ShoppingCartController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $cart = $this->getCart();
 
         $book_id = $request->input('id');
@@ -76,7 +104,7 @@ class ShoppingCartController extends Controller
             "price" => $price
         ];
 
-        session()->put('cart', $cart);
+        $this->storeCart($cart);
 
 
         return redirect()->route('cart.index');
@@ -117,7 +145,7 @@ class ShoppingCartController extends Controller
             $cart = $this->getCart();
             if(isset($cart[$id])){
                 $cart[$id]['quantity'] = $request->quantity;
-                session()->put('cart',$cart);
+                $this->storeCart($cart);
             }
         }
         return redirect()->back();
@@ -128,7 +156,7 @@ class ShoppingCartController extends Controller
         $cart = $this->getCart();
         if(isset($cart[$id])){
             $cart[$id]['quantity'] += 1;
-            session()->put('cart',$cart);
+            $this->storeCart($cart);
         }
 
         return redirect()->back();
@@ -140,7 +168,7 @@ class ShoppingCartController extends Controller
         if(isset($cart[$id])){
             if($cart[$id]['quantity']>1) {
                 $cart[$id]['quantity'] -= 1;
-                session()->put('cart', $cart);
+                $this->storeCart($cart);
             }
         }
 
@@ -159,7 +187,7 @@ class ShoppingCartController extends Controller
         $cart = $this->getCart();
         if(isset($cart[$id])){
             unset($cart[$id]);
-            session()->put('cart', $cart);
+            $this->storeCart($cart);
         }
         return redirect()->back();
 

@@ -16,10 +16,9 @@ class BookController extends Controller
 
     public function index(Request $request){
 
-//      filter by category
-        if(request()->category){
-            $category = Category::find(request()->category);
+        $category = Category::find(request()->category);
 
+        if(request()->category){
             if(!$category)
                 abort(404);
 
@@ -49,23 +48,17 @@ class BookController extends Controller
                     $query->where('name', 'ilike', '%'.$search_text.'%');
                 })->orWhere('title', 'ilike', '%'.$search_text.'%');
             $categoryName = "Hľadať: ".$search_text;
-
         }
 
-        if($request->get('slovak-language')){
-            $books = $books->orWhere('language', 'like', 'Slovensky');
-        }if($request->get('czech-language')){
-            $books = $books->orWhere('language', 'like', 'Cesky');
-        }if($request->get('english-language')){
-            $books = $books->orWhere('language', 'like', 'Anglicky');
-        }
+        $books = $this->filterLanguage($books, $request);
+        $books = $this->filterBindingType($books, $request);
+
 
         $price_from = (int)$request->minimal_price;
         $price_to = (int)$request->maximum_price;
 
         if(!empty($price_from)){
             $books = $books->where('price', '>=', $price_from);
-//            return($books->get());
         }
         if(!empty($price_to)){
             $books = $books->where('price', '<=', $price_to);
@@ -92,8 +85,42 @@ class BookController extends Controller
             'books'=>$books,
             'order_by'=>$order_by,
             'request'=>$request->all(),
+            'category'=>$category,
             'category_name' => $categoryName,
             'main_categories' => Category::whereNull('parent_id')->get(),
         ]);
+    }
+
+
+    public function filterLanguage($books, $request){
+        $languages = [];
+
+        if($request->get('slovak-language')){
+            $languages[] = 'Slovensky';
+        }if($request->get('czech-language')){
+            $languages[] = 'Cesky';
+        }if($request->get('english-language')){
+            $languages[] = 'Anglicky';
+        }
+
+        if($languages) {
+            $books = $books->whereIn('language', $languages);
+        }
+        return $books;
+    }
+
+    public function filterBindingType($books, $request){
+        $bindingTypes = [];
+
+        if($request->get('hard-cover')){
+            $bindingTypes[] = 'Pevna vazba';
+        }if($request->get('soft-cover')){
+            $bindingTypes[] = 'Makka vazba';
+        }
+
+        if($bindingTypes) {
+            $books = $books->whereIn('binding_type', $bindingTypes);
+        }
+        return $books;
     }
 }

@@ -84,43 +84,6 @@
                 </section>
 
                 <section>
-                    <h3 class="h5">Dostupnosť</h3>
-                    <div class="form-check">
-                        <input type="checkbox" name="available" class="form-check-input" id="available-check-box"
-                               @if(isset($request['available']))
-                               checked
-                            @endif>
-                        <label for="available-check-box" class="form-check-label">
-                            Na sklade
-                        </label>
-
-                    </div>
-
-                    <div class="form-check">
-                        <input type="checkbox" name="available-soon" class="form-check-input" id="available-soon-check-box"
-                               @if(isset($request['available-soon']))
-                               checked
-                            @endif>
-                        <label for="available-soon-check-box" class="form-check-label">
-                            Čoskoro dostupné
-                        </label>
-
-                    </div>
-
-                    <div class="form-check">
-                        <input type="checkbox" name="unavailable" class="form-check-input" id="unavailable-check-box"
-                               @if(isset($request['unavailable']))
-                               checked
-                            @endif>
-                        <label for="unavailable-check-box" class="form-check-label">
-                            Vypredané
-                        </label>
-
-                    </div>
-                </section>
-
-
-                <section>
                     <h3 class="h5">Typ väzby</h3>
                     <div class="form-check">
                         <input type="checkbox" name="hard-cover" class="form-check-input" id="hard-cover-check-box"

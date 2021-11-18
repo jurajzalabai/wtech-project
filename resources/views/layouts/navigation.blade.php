@@ -14,30 +14,46 @@
                 <a class=" dropdown-toggle nav-link" href="#" role="button" data-toggle="dropdown" data-bs-toggle="dropdown">Knihy</a>
                 <div class="dropdown-menu books-dropdown dropdown-large">
                     <nav class="row">
-                        <ul class="col-12 col-sm-6 col-lg-4 ">
-                            <li><a href="listing.html" class="h5">Beletria</a></li>
-                            <li><a href="listing.html">Slovenská beletria</a></li>
-                            <li><a href="listing.html">Detektívky</a></li>
-                            <li><a href="listing.html">Sci-fi</a></li>
-                            <li><a href="listing.html">Historické</a></li>
-                            <li><a href="listing.html">Klasika</a></li>
-                            <li><a href="listing.html">Romantika</a></li>
-                        </ul>
-                        <ul class="col-12 col-sm-6 col-lg-4 ">
-                            <li><a href="listing.html" class="h5">Náučná literatúra</a></li>
-                            <li><a href="listing.html">História</a></li>
-                            <li><a href="listing.html">Technika</a></li>
-                            <li><a href="listing.html">Zdravie a životný štýl</a></li>
-                            <li><a href="listing.html">Hobby</a></li>
-                            <li><a href="listing.html">Motivačná literatúra</a></li>
-                        </ul>
-                        <ul class="col-12 col-sm-6 col-md-4 ">
-                            <li><a href="listing.html" class="h5">Pre deti a mládež</a></li>
-                            <li><a href="listing.html">Pre najmenších</a></li>
-                            <li><a href="listing.html">Pre prvákov</a></li>
-                            <li><a href="listing.html">Pre teenagerov</a></li>
-                            <li><a href="listing.html">Sci-fi, fantasy</a></li>
-                        </ul>
+                        @foreach( App\Models\Category::whereNull('parent_id')->get() as $main_category)
+                            <ul class="col-12 col-sm-6 col-lg-4 ">
+                                <li>
+                                    <a href={{route('books.index',['category'=>$main_category->id])}} class="h5">
+                                        {{$main_category->name}}
+                                    </a>
+                                </li>
+                            @foreach($main_category->subCategories()->get() as $sub_category)
+                                <li>
+                                    <a href={{route('books.index',['category'=>$sub_category->id])}} >
+                                        {{$sub_category->name}}
+                                    </a>
+                                </li>
+                            @endforeach
+                            </ul>
+                        @endforeach
+{{--                        <ul class="col-12 col-sm-6 col-lg-4 ">--}}
+{{--                            <li><a href="listing.html" class="h5">Beletria</a></li>--}}
+{{--                            <li><a href="listing.html">Slovenská beletria</a></li>--}}
+{{--                            <li><a href="listing.html">Detektívky</a></li>--}}
+{{--                            <li><a href="listing.html">Sci-fi</a></li>--}}
+{{--                            <li><a href="listing.html">Historické</a></li>--}}
+{{--                            <li><a href="listing.html">Klasika</a></li>--}}
+{{--                            <li><a href="listing.html">Romantika</a></li>--}}
+{{--                        </ul>--}}
+{{--                        <ul class="col-12 col-sm-6 col-lg-4 ">--}}
+{{--                            <li><a href="listing.html" class="h5">Náučná literatúra</a></li>--}}
+{{--                            <li><a href="listing.html">História</a></li>--}}
+{{--                            <li><a href="listing.html">Technika</a></li>--}}
+{{--                            <li><a href="listing.html">Zdravie a životný štýl</a></li>--}}
+{{--                            <li><a href="listing.html">Hobby</a></li>--}}
+{{--                            <li><a href="listing.html">Motivačná literatúra</a></li>--}}
+{{--                        </ul>--}}
+{{--                        <ul class="col-12 col-sm-6 col-md-4 ">--}}
+{{--                            <li><a href="listing.html" class="h5">Pre deti a mládež</a></li>--}}
+{{--                            <li><a href="listing.html">Pre najmenších</a></li>--}}
+{{--                            <li><a href="listing.html">Pre prvákov</a></li>--}}
+{{--                            <li><a href="listing.html">Pre teenagerov</a></li>--}}
+{{--                            <li><a href="listing.html">Sci-fi, fantasy</a></li>--}}
+{{--                        </ul>--}}
 
                     </nav>
 

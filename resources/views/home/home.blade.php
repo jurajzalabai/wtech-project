@@ -63,7 +63,7 @@
         </div>
         <div class="col-md-3 col-sm-5 col-10 mx-3 notice d-flex my-2 py-2 justify-content-center">
             <i class="fa fa-cubes fa-2x my-auto"></i>
-            <span class="h5 my-auto mx-2">{{$book_active_count}} kníh na sklade</span>
+            <span class="h5 my-auto mx-2">Doručenie kdekoľovek</span>
         </div>
         <div class="col-md-3 col-sm-5 col-10 mx-3 notice d-flex my-2 py-2 justify-content-center">
             <i class="fa fa-truck fa-2x my-auto"></i>

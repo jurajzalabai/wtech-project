@@ -10,7 +10,7 @@
         <nav aria-label="breadcrumb">
             <ol class=" my-auto breadcrumb">
                 <li class="breadcrumb-item"><a  style="color: black;" href={{route('home')}}>Domov</a></li>
-                <li class="breadcrumb-item"><a  style="color: black;" href="{{route('home')}}">Knihy</a></li>
+                <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books.index')}}">Knihy</a></li>
                 @if($book->category->parentCategory)
                     <li class="breadcrumb-item"><a  style="color: black;" href="{{route('books.index', ['category'=>$book->category->parentCategory->id])}}">{{$book->category->parentCategory->name}}</a></li>
                 @endif

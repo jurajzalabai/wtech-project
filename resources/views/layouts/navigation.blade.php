@@ -75,9 +75,11 @@
 
                     <div class="dropdown text-center" style=" display: inline-flex;">
                         <button class="btn-orange px-md-2 py-1 btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{Auth::user()->name}}
+                            <i class="fa fa-user fa-lg h5"></i>
+                            Profil
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end btn-block"  aria-labelledby="dropdownMenuButton1">
+                            <li style="overflow: hidden; text-overflow: ellipsis; margin-left: 10px; max-width: 200px;  height: 1.5em;"><b>{{Auth::user()->name}}</b></li>
                             <li><a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a></li>
                         </ul>
 

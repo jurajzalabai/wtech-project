@@ -10,8 +10,6 @@
         <h1>
             Nákupný košík
         </h1>
-        <form method="POST" action="{{route('shippingPayment.store')}}">
-            {{csrf_field()}}
             @foreach($cart as $cart_item)
                 @include('components.shoppingCartItem')
             @endforeach
@@ -23,12 +21,10 @@
             @endif
 
             @if(count($cart))
-                <input type="hidden" name="id" value="2">
                 <div class="justify-content-end d-flex">
-                <button class="btn basic-button" type="submit">
+                <button class="btn basic-button" onclick="location.href='{{ route('shippingPayment.index')}}'" type="buton">
                     Pokračovať</button>
             </div>
             @endif
-        </form>
     </main>
 @endsection

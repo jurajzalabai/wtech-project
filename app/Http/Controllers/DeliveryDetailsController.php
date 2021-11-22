@@ -51,6 +51,8 @@ class DeliveryDetailsController extends Controller
             $user_id = (User::find(Auth::id()))->id;
             $order = new Order([
                     "user_id" => $user_id,
+                    "phone_number" => $request->input('tel-number'),
+                    "email" => $request->email,
                     "cart" => serialize($this->getCart()),
                     "transaction_method" => $payment,
                     "delivery_method" => $delivery,
@@ -62,7 +64,7 @@ class DeliveryDetailsController extends Controller
         } else {
             $order = new Order([
                     "name" => $request->name,
-                    "phone_number" => $request->tel-number,
+                    "phone_number" => $request->input('tel-number'),
                     "email" => $request->email,
                     "cart" => serialize($this->getCart()),
                     "transaction_method" => $payment,

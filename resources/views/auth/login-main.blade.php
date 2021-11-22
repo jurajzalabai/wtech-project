@@ -34,13 +34,6 @@
                     Zaregistrujte sa
                 </a>
             </div>
-            <div class="d-flex justify-content-center">
-                @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}">
-                    Zabudli ste heslo ?
-                </a>
-                @endif
-            </div>
         </form>
     </section>
 </main>

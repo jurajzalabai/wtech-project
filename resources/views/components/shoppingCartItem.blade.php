@@ -6,7 +6,7 @@
     </div>
     <div class="col-12 col-sm-9 col-md-7">
         <h2 class="one-row h5">
-            <a href="book_details.html">
+            <a href="{{route('books.show', $cart_item['book_id'])}}">
                 {{$cart_item['title']}}
             </a>
         </h2>
@@ -38,11 +38,15 @@
         <div class="row">
             <div class="col-8 col-md-12">
                 <div class="col-12 col-md-12 d-flex justify-content-md-end mt-2">
-                    <span class="h3">{{$cart_item['price']}} €</span>
+                    <span class="h3">{{number_format($cart_item['price'],2, '.', ' ')}} €</span>
                 </div>
                 <div class="col-6 col-md-12 d-flex justify-content-md-end" style="font-size: 1em;">
-                    @for ($i = 1; $i <= $cart_item['rating']; $i++)
-                        <i class="fa fa-star"></i>
+                    @for ($i = 1; $i <= 5; $i++)
+                        <i class="fa fa-star"
+                        @if($cart_item['rating']<$i)
+                            style="color:silver;"
+                        @endif
+                            ></i>
                     @endfor
                 </div>
             </div>

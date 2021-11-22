@@ -17,11 +17,13 @@
         <div class="mb-2">
             <p class="book-price">{{$book->price}}</p>
             <div class="d-flex justify-content-end my-auto">
-                <i class="fa fa-star "></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
+                @for ($i = 1; $i <= 5; $i++)
+                    <i class="fa fa-star"
+                    @if($book->rating<$i)
+                        style="color:silver;"
+                    @endif
+                    ></i>
+                @endfor
             </div>
         </div>
         <form action="{{route('cart.store')}}" method="POST">

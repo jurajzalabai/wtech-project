@@ -32,11 +32,13 @@
                     <span class="two-rows h4">
                         {{$book->author->name}}
                     </span>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    @for ($i = 1; $i <= 5; $i++)
+                        <i class="fa fa-star"
+                           @if($book->rating<$i)
+                           style="color:silver;"
+                            @endif
+                        ></i>
+                    @endfor
                     <br>
                     <span class="h3">
                         {{$book->price}} €

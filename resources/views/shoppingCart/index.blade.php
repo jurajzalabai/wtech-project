@@ -18,7 +18,12 @@
                 <div class="h4 text-center my-auto align-middle pt-5" style="height: 12em">
                     Nákupný košík je prázdny.
                 </div>
+            @else
+                <div class="d-flex justify-content-end mb-4">
+                    <span style="font-size: 1.5em"> Celková cena: {{number_format($total_price,2, '.', ' ')}} €</span>
+                </div>
             @endif
+
 
             @if(count($cart))
                 <div class="justify-content-end d-flex">

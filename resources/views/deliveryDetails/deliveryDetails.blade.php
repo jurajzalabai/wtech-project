@@ -6,46 +6,66 @@
 
 
 @section('content')
-<div class="container justify-content-center pt-5">
-    <section class="delivery-details">
-        <h1 class="pb-5">Dodacie údaje</h1>
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <form action="#" method="post">
-                    <label for="meno">Meno:</label><br>
-                    <input id="meno" name="meno" type="text" class="form-control rounded-pill form-width"><br>
-                    <label for="priezvisko">Priezvisko:</label><br>
-                    <input id="priezvisko" name="priezvisko" type="text" class="form-control rounded-pill form-width"><br>
-                    <label for="tel-cislo">Telefónne číslo:</label><br>
-                    <input id="tel-cislo" name="tel-cislo" type="text" class="form-control rounded-pill form-width"><br>
-                    <label for="email">Email:</label><br>
-                    <input id="email" name="email" type="text" class="form-control rounded-pill form-width"><br>
-                </form>
-            </div>
-            <div class="col-12 col-md-6">
-                <form method="post" action="#">
-                    <label for="mesto">Mesto:</label><br>
-                    <input id="mesto" name="mesto" type="text" class="form-control rounded-pill form-width"><br>
-                    <label for="psc">PSČ:</label><br>
-                    <input id="psc" name="psc" type="text" class="form-control rounded-pill form-width"><br>
-                    <label for="ulica">Ulica:</label><br>
-                    <input id="ulica" name="ulica" type="text" class="form-control rounded-pill form-width"><br>
+    <main>
+        <form method="POST"  action="{{route('deliveryDetails.store')}}">
+            {{ csrf_field() }}
+            <input type="hidden" id="shipping" name="doprava" value="{{$doprava}}">
+            <input type="hidden" id="payment" name="platba" value="{{$platba}}">
+        <div class="container justify-content-center pt-5">
+            <section class="delivery-details">
+                <h1 class="pb-5">Dodacie údaje</h1>
+                <div class="row">
+                    @if($user)
+                        <div class="col-12 col-md-6">
+                                <label for="name">Meno a Priezvisko:</label><br>
+                                <input id="name" name="name" value="{{$user->name}}" type="text" class="form-control rounded-pill form-width"><br>
+                                <label for="tel-number">Telefónne číslo:</label><br>
+                                <input id="tel-number" name="tel-number" value="{{$user->phone_number}}" type="text" class="form-control rounded-pill form-width"><br>
+                                <label for="email">Email:</label><br>
+                                <input id="email" name="email" type="text" value="{{$user->email}}" class="form-control rounded-pill form-width"><br>
+                        </div>
+                        <div class="col-12 col-md-6">
+                                <label for="city">Mesto:</label><br>
+                                <input id="city" name="city" value="{{$user->city}}" type="text" class="form-control rounded-pill form-width"><br>
+                                <label for="postal_code">PSČ:</label><br>
+                                <input id="postal_code" name="postal_code" value="{{$user->postal_code}}" type="text" class="form-control rounded-pill form-width"><br>
+                                <label for="street">Ulica:</label><br>
+                                <input id="street" name="street" type="text" value="{{$user->street}}" class="form-control rounded-pill form-width"><br>
+                        </div>
+                    @else
+                    <div class="col-12 col-md-6">
+                            <label for="name">Meno a Priezvisko:</label><br>
+                            <input id="name" name="name" type="text" class="form-control rounded-pill form-width"><br>
+                            <label for="tel-number">Telefónne číslo:</label><br>
+                            <input id="tel-number" name="tel-number" type="text" class="form-control rounded-pill form-width"><br>
+                            <label for="email">Email:</label><br>
+                            <input id="email" name="email" type="text" class="form-control rounded-pill form-width"><br>
+                    </div>
+                    <div class="col-12 col-md-6">
+                            <label for="city">Mesto:</label><br>
+                            <input id="city" name="city" type="text" class="form-control rounded-pill form-width"><br>
+                            <label for="postal_code">PSČ:</label><br>
+                            <input id="postal_code" name="postal_code" type="text" class="form-control rounded-pill form-width"><br>
+                            <label for="street">Ulica:</label><br>
+                            <input id="street" name="street" type="text" class="form-control rounded-pill form-width"><br>
 
-                </form>
-            </div>
+                    </div>
+                    @endif
+                </div>
+                <div class="d-flex justify-content-between pb-5">
+                    <!--            <div class="col-12 col-sm-7">-->
+                    <button class="btn basic-button" onclick="location.href='{{ route('shippingPayment.index')}}'" type="button">
+                        Späť</button><br>
+                    <!--            </div>-->
+                    <!--            <div class="col-12 col-sm-5">-->
+                    <div class="justify-content-end">
+                        <button class="btn basic-button" type="submit">
+                            Dokončiť</button><br>
+                    </div>
+                    <!--            </div>-->
+                </div>
+            </section>
         </div>
-        <div class="d-flex justify-content-between pb-5">
-            <!--            <div class="col-12 col-sm-7">-->
-            <button class="btn basic-button" onclick="location.href='payment_delivery.html'" type="button">
-                Späť</button><br>
-            <!--            </div>-->
-            <!--            <div class="col-12 col-sm-5">-->
-            <div class="justify-content-end">
-                <button class="btn basic-button" onclick="location.href='shopping_cart.html'" type="button">
-                    Dokončiť</button><br>
-            </div>
-            <!--            </div>-->
-        </div>
-    </section>
-</div>
+        </form>
+    </main>
 @endsection

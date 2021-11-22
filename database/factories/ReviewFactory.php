@@ -15,10 +15,9 @@ class ReviewFactory extends Factory
     {
         return [
             'username' => $this->faker->name(),
-            'book_id' => 1,
+            'book_id' => $this->faker->numberBetween(1, 100),
             'review_text' => $this->faker->realText(250),
             'rating' => $this->faker->numberBetween(1, 5)
-
         ];
     }
 }

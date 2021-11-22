@@ -25,9 +25,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('loginak', [LoginController::class, 'index'])->name('loginak');
 Route::get('registrak', [RegistrationController::class, 'index'])->name('registrak');
 
-//Route::get('shippingPayment', [\App\Http\Controllers\ShippingPaymentController::class, 'index'])->name('shippingPayment');
 Route::resource('shippingPayment', \App\Http\Controllers\ShippingPaymentController::class);
-Route::get('deliveryDetails', [\App\Http\Controllers\DeliveryDetailsController::class, 'index'])->name('deliveryDetails');
+//Route::post('shippingPayment', [\App\Http\Controllers\ShippingPaymentController::class, 'create'])->name('shippingPayment.create');
+//Route::resource('shippingPayment', \App\Http\Controllers\ShippingPaymentController::class);
+Route::resource('deliveryDetails', \App\Http\Controllers\DeliveryDetailsController::class);
 //Route::post('deliveryDetails', [\App\Http\Controllers\DeliveryDetailsController::class, 'index'])->name('deliveryDetails.store');
 
 //Route::get('/cart', [ShoppingCartController::class, 'index'])->name('cart.index');

@@ -114,7 +114,7 @@
             <div class="col-12 col-sm-6">
                 Dátum vydania: {{$book->publish_date}}<br>
                 Väzba: {{$book->binding_type}}<br>
-                Počet strán: {{$book->page_number}}
+                Počet strán: {{$book->number_of_pages}}
             </div>
             <div class="col-12 col-sm-6">
                 Čas čítania: {{$book->reading_time}}<br>

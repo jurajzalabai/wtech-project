@@ -51,6 +51,7 @@ class DeliveryDetailsController extends Controller
             $user_id = (User::find(Auth::id()))->id;
             $order = new Order([
                     "user_id" => $user_id,
+                    "name" => $request->name,
                     "phone_number" => $request->input('tel-number'),
                     "email" => $request->email,
                     "cart" => serialize($this->getCart()),

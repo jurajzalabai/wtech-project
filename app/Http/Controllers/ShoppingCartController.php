@@ -91,7 +91,7 @@ class ShoppingCartController extends Controller
         if(isset($cart[$book_id])){
             $cart[$book_id]['quantity'] += $quantity;
             $cart[$book_id]['price'] = $cart[$book_id]['quantity'] * $book->price;
-            session()->put('cart', $cart);
+            $this->storeCart($cart);
 
             return redirect()->route('cart.index');
         }

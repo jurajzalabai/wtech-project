@@ -50,7 +50,11 @@ class ShoppingCartController extends Controller
     {
         //
         $cart = $this->getCart();
-        return view('shoppingCart.index', ['cart'=>$cart]);
+        $total_price = 0;
+        foreach($cart as $item){
+            $total_price+=$item['price'];
+        }
+        return view('shoppingCart.index', ['cart'=>$cart, 'total_price' => $total_price]);
     }
 
     /**
@@ -71,8 +75,6 @@ class ShoppingCartController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $cart = $this->getCart();
 
         $book_id = $request->input('id');
@@ -84,11 +86,11 @@ class ShoppingCartController extends Controller
         }
 
 
-
         $price = $book->price * $quantity;
 
         if(isset($cart[$book_id])){
             $cart[$book_id]['quantity'] += $quantity;
+            $cart[$book_id]['price'] = $cart[$book_id]['quantity'] * $book->price;
             session()->put('cart', $cart);
 
             return redirect()->route('cart.index');
@@ -144,7 +146,9 @@ class ShoppingCartController extends Controller
         if($request->quantity){
             $cart = $this->getCart();
             if(isset($cart[$id])){
+                $book = Book::find($id);
                 $cart[$id]['quantity'] = $request->quantity;
+                $cart[$id]['price'] = $cart[$id]['quantity'] * $book->price;
                 $this->storeCart($cart);
             }
         }
@@ -155,7 +159,9 @@ class ShoppingCartController extends Controller
     {
         $cart = $this->getCart();
         if(isset($cart[$id])){
+            $book = Book::find($id);
             $cart[$id]['quantity'] += 1;
+            $cart[$id]['price'] = $cart[$id]['quantity'] * $book->price;
             $this->storeCart($cart);
         }
 
@@ -167,7 +173,9 @@ class ShoppingCartController extends Controller
         $cart = $this->getCart();
         if(isset($cart[$id])){
             if($cart[$id]['quantity']>1) {
+                $book = Book::find($id);
                 $cart[$id]['quantity'] -= 1;
+                $cart[$id]['price'] = $cart[$id]['quantity'] * $book->price;
                 $this->storeCart($cart);
             }
         }

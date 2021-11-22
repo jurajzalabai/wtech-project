@@ -43,14 +43,14 @@
     </div>
 
     <section class="row col-gap">
-        <h2><a href="listing.html">Najpredávanejšie</a></h2>
-        @foreach($latest as $book)
+        <h2><a href="{{route('books.index', ['order_by'=>'top_selling'])}}">Najpredávanejšie</a></h2>
+        @foreach($best_selling as $book)
             @include('components.book-home-product')
         @endforeach
     </section>
     <section class="row my-5">
-        <h2><a href="listing.html">Najnovšie</a></h2>
-        @foreach($best_selling as $book)
+        <h2><a href="{{route('books.index', ['order_by'=>'newest'])}}">Najnovšie</a></h2>
+        @foreach($latest as $book)
             @include('components.book-home-product')
         @endforeach
     </section>

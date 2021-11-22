@@ -1,4 +1,4 @@
-<div class="product col-lg-2 col-md-3 col-4">
+<div class="product col-lg-2 col-md-3 col-sm-4 col-6">
     <div class="book-cover w-100">
         <a href="{{ route('books.show', $book->id) }}">
             <img src="{{asset($book->photo_path)}}" alt="Karel Gott - Umelecky a soukromy zivot kniha" class="img-fluid" width="120">

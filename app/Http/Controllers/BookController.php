@@ -43,10 +43,11 @@ class BookController extends Controller
 //      full-text-search
         if($request->search){
             $search_text = $request->search;
-            $books = $books->whereHas('author',
-                function($query) use ($search_text) {
-                    $query->where('name', 'ilike', '%'.$search_text.'%');
-                })->orWhere('title', 'ilike', '%'.$search_text.'%');
+            $books = $books->where(function($q) use ($search_text) {
+                $q->whereHas('author', function ($query) use ($search_text) {
+                        $query->where('name', 'ilike', '%' . $search_text . '%');
+                    })->orWhere('title', 'ilike', '%' . $search_text . '%');
+            });
             $categoryName = "Hľadať: ".$search_text;
         }
 

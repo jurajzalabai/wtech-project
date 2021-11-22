@@ -17,7 +17,7 @@ class ShippingPaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): \Illuminate\Http\Response
+    public function store(Request $request)
     {
         //
         $cart = $this->getCart();

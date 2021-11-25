@@ -13,6 +13,7 @@
             <div class="d-flex justify-content-around py-5">
                 <form action="{{route('admin.picture')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    {{ method_field('PUT') }}
                     @csrf
                     <input type="hidden" id="id" name="id" value="{{$book->id}}">
                     <label for="image" class="col-form-label">Pridaj fotku</label>

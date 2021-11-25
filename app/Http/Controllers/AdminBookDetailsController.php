@@ -28,21 +28,22 @@ class AdminBookDetailsController extends Controller
 
     public function create(Request $request){
 
+//        dd($request->all());
         $rules = array(
-           'title' => 'required',
+            'title' => 'required',
             'publisher' => 'required',
             'description' => 'required',
-            'price' => 'required',
-            'number_of_pages' => 'required',
-            'rating' => 'required',
-            'publish_date' => 'required',
-            'reading_time' => 'required',
+            'price' => 'required'|'integer',
+            'number_of_pages' => 'required'|'integer',
+            'rating' => 'required'|'integer',
+            'publish_date' => 'required'|'date',
+            'reading_time' => 'required'|'integer',
             'binding_type' => 'required',
             'language' => 'required',
-            'stock_level' => 'required',
+            'stock_level' => 'required'|'integer',
             'image' => 'required|image',
             'author' => 'required',
-            'category' => 'required',
+            'category' => 'required'|'integer',
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -53,8 +54,8 @@ class AdminBookDetailsController extends Controller
             return redirect()->back();
         }
 
-
-        $path = "img/" . $request->file('image')->getClientOriginalName();
+        $path = $request->file('image')->store('uploads', 'public');
+        //dd($request->file('image')->store('img', 'public'));
 
         $author = Author::where("name", $request->input('author'))->get()->first();
         if ($author){
@@ -81,7 +82,7 @@ class AdminBookDetailsController extends Controller
             'binding_type' => $request->input('binding_type'),
             'language' => $request->input('language'),
             'stock_level' => $request->input('stock_level'),
-            'photo_path' => $path,
+            'photo_path' => "storage/" . $path,
             'active' => true,
             'author_id' => $id,
             'category_id' => $request->input('category'),
@@ -89,7 +90,7 @@ class AdminBookDetailsController extends Controller
         );
         $book->save();
         $request->session()->flash('message', 'Kniha úspešne vytvorená');
-        return Route('home');
+        return redirect()->route('home');
     }
 
     public function new()
@@ -101,6 +102,7 @@ class AdminBookDetailsController extends Controller
 
     public function picture(Request $request)
     {
+
         $rules = array(
             'image' => 'required|image',
         );
@@ -114,7 +116,7 @@ class AdminBookDetailsController extends Controller
         }
 
         $book = Book::find($request->input('id'));
-        $path = "img/" . $request->file('image')->getClientOriginalName();
+        $path = "storage/" . $request->file('image')->store('uploads', 'public');
         $book['photo_path'] = $path;
         $book->save();
         $request->session()->flash('message', 'Obrázok bol zmenený');
@@ -136,12 +138,7 @@ class AdminBookDetailsController extends Controller
     }
 
 
-    //TODO fotka sa da len z hentade dat - spolu
-
-    // kategoria tiez neni
-    // ani obrazok
-
-    //TODO pri nakupniom kopsiku im zvysit sold count
+    // path pri dvoch postoch.. netusim ako ..
     // cas citania ?
     // validacia na vsetko
     // vymazanie reviews
@@ -150,26 +147,26 @@ class AdminBookDetailsController extends Controller
     //TODO SIDE
     //TODO description  - stranka od ada
     //TODO description textarea cele zle - input
-
+    //TODO ten isty nazov pre knihu
     // TODO selektor - automaticka hodnota ///// add proste automaticky
 
 
     public function change(Request $request)
     {
         $rules = array(
-            'title' => 'required', 'string:value',
-            'publisher' => 'required', 'string:value',
-            'description' => 'required', 'string:value',
-            'price' => 'required',
-            'number_of_pages' => 'required',
-            'rating' => 'required',
-            'publish_date' => 'required',
-            'reading_time' => 'required',
+            'title' => 'required',
+            'publisher' => 'required',
+            'description' => 'required',
+            'price' => 'required'|'integer',
+            'number_of_pages' => 'required'|'integer',
+            'rating' => 'required'|'integer',
+            'publish_date' => 'required'|'date',
+            'reading_time' => 'required'|'integer',
             'binding_type' => 'required',
             'language' => 'required', 'string:value',
-//            'photo_path' => 'required',
+            'photo_path' => 'required',
             'author' => 'required',
-            'category' => 'required',
+            'category' => 'required'|'integer',
         );
 
         $validator = Validator::make($request->all(), $rules);

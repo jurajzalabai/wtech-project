@@ -19,7 +19,7 @@
         {{--                </ol>--}}
         {{--            </nav>--}}
         {{--        </div>--}}
-        <form method="get" action="{{ route('admin.create')}}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.create')}}" enctype="multipart/form-data">
             @csrf
         <div class="row book-main-info">
             <div class="d-flex justify-content-around py-5">

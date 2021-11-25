@@ -26,7 +26,7 @@ class CreateBooksTable extends Migration
             $table->string('binding_type');
             $table->string('publisher');
             $table->string('language');
-            $table->timestamp('reading_time');
+            $table->unsignedBigInteger('reading_time');
             $table->timestamp('publish_date');
             $table->unsignedInteger('stock_level');
             $table->string('photo_path');

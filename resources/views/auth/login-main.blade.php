@@ -30,7 +30,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 Nemáte účet ? &emsp;&emsp;
-                <a href="{{route('registrak')}}">
+                <a href="{{route('register')}}">
                     Zaregistrujte sa
                 </a>
             </div>

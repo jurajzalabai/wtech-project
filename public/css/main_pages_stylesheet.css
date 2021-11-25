@@ -5,6 +5,11 @@ a{
     text-decoration: none;
 }
 
+
+main{
+    min-height: 70vh;
+}
+
 /*--------------TOP NAV------------*/
 
 img.logo{

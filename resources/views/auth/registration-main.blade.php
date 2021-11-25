@@ -52,7 +52,7 @@
                     Už máte vytvorený účet ? &emsp;
                 </div>
                 <div class="col-12 col-sm-5">
-                    <a href="{{route('loginak')}}">
+                    <a href="{{route('login')}}">
                         Prihláste sa
                     </a>
                 </div>

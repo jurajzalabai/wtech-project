@@ -22,8 +22,8 @@ use App\Http\Controllers\ShoppingCartController;
 Route::resource('books', BookController::class);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('loginak', [LoginController::class, 'index'])->name('loginak');
-Route::get('registrak', [RegistrationController::class, 'index'])->name('registrak');
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::get('register', [RegistrationController::class, 'index'])->name('register');
 
 Route::resource('shippingPayment', \App\Http\Controllers\ShippingPaymentController::class);
 //Route::post('shippingPayment', [\App\Http\Controllers\ShippingPaymentController::class, 'create'])->name('shippingPayment.create');

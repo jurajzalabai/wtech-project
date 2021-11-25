@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('postal_code');
             $table->string('street');
+            $table->boolean('admin')->default(0);
             $table->text('cart')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

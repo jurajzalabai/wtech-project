@@ -33,17 +33,17 @@ class AdminBookDetailsController extends Controller
             'title' => 'required',
             'publisher' => 'required',
             'description' => 'required',
-            'price' => 'required'|'integer',
-            'number_of_pages' => 'required'|'integer',
+            'price' => 'required|integer',
+            'number_of_pages' => 'required|integer',
             'rating' => 'required'|'integer',
-            'publish_date' => 'required'|'date',
-            'reading_time' => 'required'|'integer',
+            'publish_date' => 'required|date',
+            'reading_time' => 'required|integer',
             'binding_type' => 'required',
             'language' => 'required',
-            'stock_level' => 'required'|'integer',
+            'stock_level' => 'required|integer',
             'image' => 'required|image',
             'author' => 'required',
-            'category' => 'required'|'integer',
+            'category' => 'required|integer',
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -153,20 +153,22 @@ class AdminBookDetailsController extends Controller
 
     public function change(Request $request)
     {
+//        return $request->all();
+
         $rules = array(
             'title' => 'required',
             'publisher' => 'required',
             'description' => 'required',
-            'price' => 'required'|'integer',
-            'number_of_pages' => 'required'|'integer',
-            'rating' => 'required'|'integer',
-            'publish_date' => 'required'|'date',
-            'reading_time' => 'required'|'integer',
+            'price' => 'required',
+            'number_of_pages' => 'required',
+            'rating' => 'required',
+            'publish_date' => 'required',
+            'reading_time' => 'required',
             'binding_type' => 'required',
-            'language' => 'required', 'string:value',
+            'language' => 'required',
             'photo_path' => 'required',
             'author' => 'required',
-            'category' => 'required'|'integer',
+            'category' => 'required',
         );
 
         $validator = Validator::make($request->all(), $rules);

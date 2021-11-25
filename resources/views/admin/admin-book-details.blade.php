@@ -70,7 +70,7 @@
                 <input id="rating" name="rating" required type="text" class="form-control rounded-pill form-width" value="{{$book->rating}}"><br>
 
                 <label for="price">Price:</label><br>
-                <input id="price" name="price" required type="text" class="form-control rounded-pill form-width" value="{{$book->price}}"><br>
+                <input id="price" name="price" required type="number" class="form-control rounded-pill form-width" value="{{$book->price}}"><br>
 
             </section>
         <section class="block-text mt-3">

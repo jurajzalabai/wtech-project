@@ -16,6 +16,7 @@ class ShippingPaymentController extends Controller
 
     public function create(Request $request)
     {
+
 //        $order = Order::create([
 //            "transaction_method" => $request->input('payment'),
 //            "delivery_method" => $request->input('delivery'),
@@ -38,6 +39,7 @@ class ShippingPaymentController extends Controller
         if($delivery and $payment){
             return redirect()->route('deliveryDetails.index', ['platba'=>$payment, 'doprava'=>$delivery]);
         }
+        $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
         return redirect()->back();
         //
 //        return route('deliveryDetails', ['order'=>$order]);

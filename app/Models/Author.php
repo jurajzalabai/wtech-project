@@ -13,4 +13,13 @@ class Author extends Model
     {
         return $this->hasMany(Book::class);
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+    ];
 }

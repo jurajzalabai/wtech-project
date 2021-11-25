@@ -20,4 +20,24 @@ class Book extends Model
     public function review(){
         return $this->hasMany(Review::class);
     }
+
+    protected $fillable = [
+            'title',
+            'publisher',
+            'description',
+            'price',
+            'number_of_pages',
+            'rating',
+            'sold_count',
+            'publish_date',
+            'reading_time',
+            'binding_type',
+            'language',
+            'stock_level',
+            'photo_path',
+            'active',
+            'author_id',
+            'category_id',
+    ];
+
 }

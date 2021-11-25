@@ -8,6 +8,9 @@
     <form method="GET"  action="{{route('shippingPayment.create')}}">
         {{ csrf_field() }}
         <main class="row container-fluid main-container">
+            @if(Session::has('message'))
+                <p class="alert alert-danger">{{ Session::get('message') }}</p>
+            @endif
                 <section class="col-lg-6 col-12 first-column">
                     <h1>
                         Doprava

@@ -13,6 +13,9 @@
             <input type="hidden" id="payment" name="platba" value="{{$platba}}">
         <div class="container justify-content-center pt-5">
             <section class="delivery-details">
+                @if(Session::has('message'))
+                    <p class="alert alert-danger">{{ Session::get('message') }}</p>
+                @endif
                 <h1 class="pb-5">Dodacie údaje</h1>
                 <div class="row">
                     @if($user)

@@ -128,14 +128,7 @@
         <div class="block-text p-3" style="background-color: #e8d2b7; border-radius: 10px">
             @if((count($reviews)))
                 @foreach($reviews as $k=>$review)
-                <div class="review @if($k>=2) collapse @endif">
-                    <h3 class="mt-2 h5">{{$review->username}}</h3>
-                    @for ($i = 1; $i <= $review->rating; $i++)
-                        <i class="fa fa-star"></i>
-                    @endfor
-                    <p id="review{{$review->id}}" class="">{{$review->review_text}}{{$review->review_text}}{{$review->review_text}}</p>
-    {{--                <button class="review-button btn basic-button" type="button" style="font-weight: bold">Zobraziť viac</button>--}}
-                </div>
+                    @include('components.review')
                 @endforeach
                 <div class="d-flex justify-content-center" style="background: none">
                     <button class="btn basic-button" id="show_reviews_button" onclick="change_text_button()" data-bs-toggle="collapse" data-bs-target=".review.collapse" style="font-weight: bold" type="button">Zobraziť viac</button>

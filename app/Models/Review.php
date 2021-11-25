@@ -12,4 +12,16 @@ class Review extends Model
     public function book(){
         return $this->belongsTo(Book::class);
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'username',
+        'book_id',
+        'review_text',
+        'rating',
+    ];
 }

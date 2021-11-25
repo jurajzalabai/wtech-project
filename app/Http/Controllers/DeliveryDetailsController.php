@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Order;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class DeliveryDetailsController extends Controller
 {
@@ -32,21 +34,32 @@ class DeliveryDetailsController extends Controller
         }
 
         if ($delivery==null) {
+            $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
             return redirect()->back();
         }
         if ($payment==null) {
+            $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
             return redirect()->back();
         }
 
-        $request->validate([
+        $rules = array(
                 'name' => 'required', 'string:value',
                 'tel-number' => 'required', 'string:value',
                 'email' => 'required', 'email',
                 'city' => 'required', 'string:value',
                 'postal_code' => 'required', 'string:value',
                 'street' => 'required', 'string:value'
-            ]
         );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
+            return redirect()->back();
+        }
+
+
         if (Auth::user()) {
             $user_id = (User::find(Auth::id()))->id;
             $order = new Order([
@@ -75,6 +88,12 @@ class DeliveryDetailsController extends Controller
                     "street" => $request->street
                 ]
             );
+        }
+        $cart = $this->getCart();
+        foreach ($cart as $item) {
+            $book = Book::find($item["book_id"]);
+            $book["sold_count"] += $item["quantity"];
+            $book->save();
         }
         $this->deleteCart();
         $order->save();

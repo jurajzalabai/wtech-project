@@ -3,6 +3,10 @@
     <link href="{{asset('css/form_stylesheet.css') }}" rel="stylesheet">
 @endsection
 
+@section('navigation')
+    @include('layouts.navigation')
+@endsection
+
 @section('content')
 
 <main class="container justify-content-center pt-5">

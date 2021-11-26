@@ -4,6 +4,9 @@
     <link href="{{asset('css/shopping_cart_stylesheet.css') }}" rel="stylesheet">
 @endsection
 
+@section('navigation')
+    @include('layouts.navigation')
+@endsection
 
 @section('content')
     <main id="shopping-cart" class="block-text container">

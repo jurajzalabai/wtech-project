@@ -4,38 +4,85 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class AdminBookDetailsController extends Controller
 {
-    public function show($id){
+    public function edit(Request $request, $id){
+
         $book = Book::find($id);
-        if (!$book){
-            abort(404);
-        }
         $reviews =  Review::where('book_id', $book->id)->get();
         return view('admin.admin-book-details', ['reviews'=>$reviews, 'book'=>$book]);
+    }
+
+    public function index(Request $request){
+
+//      full-text-search
+        if($request->search){
+            $search_text = $request->search;
+            $books = Book::where(function($q) use ($search_text) {
+                $q->whereHas('author', function ($query) use ($search_text) {
+                    $query->where('name', 'ilike', '%' . $search_text . '%');
+                })->orWhere('title', 'ilike', '%' . $search_text . '%');
+            });
+            $categoryName = "Hľadať: ".$search_text;
+        }
+
+        if(!isset($books)){
+//         $books = Book::with('author');
+            $books = Book::with('author');
+            $categoryName = "Všetky knihy";
+
+        }
+
+        $order_by = request()->input('order_by','price_asc');
+        switch ($order_by){
+            case 'newest':
+                $books = $books->orderBy('created_at');
+                break;
+            case 'top_selling':
+                $books = $books->orderBy('sold_count');
+                break;
+            default:
+                $books = $books->orderBy('price');
+                break;
+        }
+
+        $books = $books->paginate(10);
+
+
+
+        return view('admin.index', [
+            'books'=>$books,
+            'order_by' =>$order_by,
+            'category_name' => $categoryName,
+        ]);
     }
 
     public function destroy($id)
     {
         $book_2 = Book::find($id);
         $book_2->delete();
-        return redirect()->route('home');
+        return redirect()->route('admin.index');
     }
 
     public function create(Request $request){
+        return view('admin.admin-book-details-new');
+    }
+
+    public function store(Request $request){
 
 //        dd($request->all());
-        $rules = array(
+        $request->validate([
             'title' => 'required',
             'publisher' => 'required',
             'description' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'number_of_pages' => 'required|integer',
-            'rating' => 'required'|'integer',
+            'rating' => 'required|integer|between:1,5',
             'publish_date' => 'required|date',
             'reading_time' => 'required|integer',
             'binding_type' => 'required',
@@ -44,15 +91,8 @@ class AdminBookDetailsController extends Controller
             'image' => 'required|image',
             'author' => 'required',
             'category' => 'required|integer',
-        );
+        ]);
 
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails())
-        {
-            $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
-            return redirect()->back();
-        }
 
         $path = $request->file('image')->store('uploads', 'public');
         //dd($request->file('image')->store('img', 'public'));
@@ -70,35 +110,28 @@ class AdminBookDetailsController extends Controller
         }
 
         $book = new Book([
-            'title' => $request->input('title'),
-            'publisher' => $request->input('publisher'),
-            'description' => $request->input('description'),
-            'price' => $request->input('price'),
-            'number_of_pages' => $request->input('number_of_pages'),
-            'rating' => $request->input('rating'),
-            'sold_count' => 0,
-            'publish_date' => $request->input('publish_date'),
-            'reading_time' => $request->input('reading_time'),
-            'binding_type' => $request->input('binding_type'),
-            'language' => $request->input('language'),
-            'stock_level' => $request->input('stock_level'),
-            'photo_path' => "storage/" . $path,
-            'active' => true,
-            'author_id' => $id,
-            'category_id' => $request->input('category'),
+                'title' => $request->input('title'),
+                'publisher' => $request->input('publisher'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+                'number_of_pages' => $request->input('number_of_pages'),
+                'rating' => $request->input('rating'),
+                'sold_count' => 0,
+                'publish_date' => $request->input('publish_date'),
+                'reading_time' => $request->input('reading_time'),
+                'binding_type' => $request->input('binding_type'),
+                'language' => $request->input('language'),
+                'stock_level' => $request->input('stock_level'),
+                'photo_path' => "storage/" . $path,
+                'active' => true,
+                'author_id' => $id,
+                'category_id' => $request->input('category'),
             ]
         );
         $book->save();
         $request->session()->flash('message', 'Kniha úspešne vytvorená');
-        return redirect()->route('home');
+        return redirect()->route('admin.index');
     }
-
-    public function new()
-    {
-        return view('admin.admin-book-details-new');
-    }
-
-
 
     public function picture(Request $request)
     {
@@ -151,40 +184,26 @@ class AdminBookDetailsController extends Controller
     // TODO selektor - automaticka hodnota ///// add proste automaticky
 
 
-    public function change(Request $request)
+    public function update(Request $request, $id)
     {
-//        return $request->all();
-
-        $rules = array(
+        $book = Book::find($id);
+        $request->validate([
             'title' => 'required',
             'publisher' => 'required',
             'description' => 'required',
-            'price' => 'required',
-            'number_of_pages' => 'required',
-            'rating' => 'required',
-            'publish_date' => 'required',
-            'reading_time' => 'required',
+            'price' => 'required|numeric',
+            'number_of_pages' => 'required|integer',
+            'rating' => 'required|integer|between:1,5',
+            'publish_date' => 'required|date',
+            'reading_time' => 'required|integer',
             'binding_type' => 'required',
             'language' => 'required',
-            'photo_path' => 'required',
+            'stock_level' => 'required|integer',
+            'image' => 'required|image',
             'author' => 'required',
-            'category' => 'required',
-        );
+            'category' => 'required|integer',
+        ]);
 
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails())
-        {
-            $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
-            return redirect()->back();
-        }
-
-        if ($request->input('id')){
-            $book = Book::find($request->input('id'));
-        }
-        else{
-            abort(404);
-        }
         $author = Author::where("name", $request->input('author'))->get()->first();
         if ($author){
             $id = $author["id"];
@@ -198,18 +217,18 @@ class AdminBookDetailsController extends Controller
         }
         $book['title'] = $request->input('title');
         $book['author_id'] = $id;
-        $book['rating'] = $request->input('rating');
-        $book['price'] = $request->input('price');
+        $book['rating'] = (int)$request->input('rating');
+        $book['price'] = (float)$request->input('price');
         $book['description'] = $request->input('description');
         $book['publish_date'] = $request->input('publish_date');
         $book['binding_type'] = $request->input('binding_type');
-        $book['number_of_pages'] = $request->input('number_of_pages');
-        $book['reading_time'] = $request->input('reading_time');
+        $book['number_of_pages'] = (int)$request->input('number_of_pages');
+        $book['reading_time'] = (int)$request->input('reading_time');
         $book['publisher'] = $request->input('publisher');
         $book['language'] = $request->input('language');
         $book['category_id'] = $request->input('category');
         $book->save();
         $request->session()->flash('message', 'Kniha bola zmenená');
-        return redirect()->back();
+        return redirect()->route('admin.index');
     }
 }

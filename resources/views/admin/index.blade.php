@@ -20,28 +20,6 @@
                                 Pridať knihu
                         </button>
                     </div>
-{{--                    <div class="col-auto my-auto d-flex px-0">--}}
-{{--                        <div class="dropdown">--}}
-{{--                            <button class="btn btn-orange dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">--}}
-{{--                                @switch($order_by)--}}
-{{--                                    @case('price_asc')--}}
-{{--                                    Najlacnejšie--}}
-{{--                                    @break--}}
-{{--                                    @case('newest')--}}
-{{--                                    Najnovšie--}}
-{{--                                    @break--}}
-{{--                                    @case('top_selling')--}}
-{{--                                    Najpredávanejšie--}}
-{{--                                    @break--}}
-{{--                                @endswitch--}}
-{{--                            </button>--}}
-{{--                            <ul class="dropdown-menu dropdown-menu-end">--}}
-{{--                                <li><a class="dropdown-item" href='{{route('admin.index',array_merge(request()->all(),['order_by'=>'price_asc']))}}'>Najlacnejšie</a></li>--}}
-{{--                                <li><a class="dropdown-item" href='{{route('admin.index',array_merge(request()->all(),['order_by'=>'top_selling']))}}'>Najpredávanejšie</a></li>--}}
-{{--                                <li><a class="dropdown-item" href='{{route('admin.index',array_merge(request()->all(),['order_by'=>'newest']))}}'>Najnovšie</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
                 </div>
 
                 @if(!count($books))

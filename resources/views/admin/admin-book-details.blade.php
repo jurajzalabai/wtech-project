@@ -75,19 +75,22 @@
                 <p class="alert alert-success">{{ Session::get('message') }}</p>
                 @endif
             @endif
-            <section  class="col-12 d-block justify-content-center">
+
+            <section  class="block-text col-12 d-block justify-content-center">
+                <div class="p-4">
+
                 <label for="title">Názov:</label><br>
                 <input id="title" name="title" required type="text" class="form-control rounded-pill form-width" value="{{$book->title}}"><br>
 
                 <label for="author">Autor:</label><br>
                 <input id="author" name="author" required type="text" class="form-control rounded-pill form-width" value="{{$book->author->name}}"><br>
 
-                <label for="rating">rating:</label><br>
+                <label for="rating">Hodnotenie:</label><br>
                 <input id="rating" name="rating" required type="text" class="form-control rounded-pill form-width" value="{{$book->rating}}"><br>
 
-                <label for="price">Price:</label><br>
+                <label for="price">Cena:</label><br>
                 <input id="price" name="price" required type="text" class="form-control rounded-pill form-width" value="{{$book->price}}"><br>
-
+                </div>
             </section>
         <section class="block-text mt-3">
             <h2 class="mt-4">Popis</h2>
@@ -100,10 +103,10 @@
             <h2>Detaily</h2>
             <div class=" p-3 row">
                 <div class="col-12 col-sm-6">
-                    <label for="publish_date">Dátum vydania::</label><br>
+                    <label for="publish_date">Dátum vydania:</label><br>
                     <input id="publish_date" name="publish_date" required type="text" value="{{$book->publish_date}}" class="form-control rounded-pill form-width"><br>
 
-                    <label for="binding_type" style="font-size: 20px">Typ vazby:</label>
+                    <label for="binding_type">Typ väzby:</label>
                     <br>
                     @if($book->binding_type == "Pevna vazba")
                         <input type="radio" id="strong" name="binding_type" value="Pevna vazba" checked>
@@ -120,36 +123,28 @@
                     <br>
                     <label for="number_of_pages">Počet strán:</label><br>
                     <input id="number_of_pages" name="number_of_pages" value="{{$book->number_of_pages}}" required type="text" class="form-control rounded-pill form-width"><br>
+                    <label for="category">Zvoľte kategóriu:</label><br>
 
-                        <label for="category">Zvoľte kategóriu:</label>
-                        <select name="category" id="category">
-                            <option value="1">Beletria</option>
-                            <option value="2">Náučná literatúra</option>
-                            <option value="3">Pre deti a mládež</option>
-                            <optgroup label="Beletria">
-                                <option value="4">Slovenská beletria</option>
-                                <option value="5">Detektívky</option>
-                                <option value="6">Sci-Fi</option>
-                                <option value="7">Historické</option>
-                                <option value="8">Klasika</option>
-                                <option value="9">Romantika</option>
+                    <select name="category" id="category">
+                        @foreach($main_categories as $main_category)
+                            @if ($main_category->id == $book->category_id)
+                                <option value="{{$main_category->name}}" selected>{{$main_category->name}}</option>
+                            @else
+                                <option value="{{$main_category->name}}">{{$main_category->name}}</option>
+                            @endif
+                        @endforeach
+                        @foreach($main_categories as $main_category)
+                            <optgroup label="{{$main_category->name}}">
+                                @foreach($main_category->subCategories()->get() as $sub_category)
+                                    @if ($sub_category->id == $book->category_id)
+                                        <option value="{{$sub_category->name}}" selected>{{$sub_category->name}}</option>
+                                    @else
+                                        <option value="{{$sub_category->name}}">{{$sub_category->name}}</option>
+                                    @endif
+                                @endforeach
                             </optgroup>
-                            <optgroup label="Náučná literatúra">
-                                <option value="10">Historické</option>
-                                <option value="11">Technika</option>
-                                <option value="12">Zdravý životný štýl</option>
-                                <option value="13">Hobby</option>
-                                <option value="14">Motivačná literatúra</option>
-                            </optgroup>
-                            <optgroup label="Pre deti a mládež">
-                                <option value="15">Pre najmenších</option>
-                                <option value="16">Pre prvákov</option>
-                                <option value="17">Pre teenagerov</option>
-                                <option value="18">Sci-Fi</option>
-                                <option value="19">Fantasy</option>
-                            </optgroup>
-                        </select>
-                        <br><br>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-12 col-sm-6">
                     <label for="reading_time">Čas čítania:</label><br>
@@ -158,9 +153,24 @@
                     <label for="publisher">Vydavateľstvo:</label><br>
                     <input id="publisher" name="publisher" value="{{$book->publisher}}" required type="text" class="form-control rounded-pill form-width"><br>
 
-
-                    <label for="language">Jazyk:</label><br>
-                    <input id="language" name="language" value="{{$book->language}}" required type="text" class="form-control rounded-pill form-width"><br>
+                    <label for="category">Jazyk:</label><br>
+                    <select name="language" id="language">
+                        @if ($book->language == "Slovensky")
+                        <option value="Slovensky" selected>Slovensky</option>
+                        @else
+                            <option value="Slovensky">Slovensky</option>
+                        @endif
+                        @if ($book->language == "Anglicky")
+                            <option value="Anglicky" selected>Anglicky</option>
+                        @else
+                            <option value="Anglicky">Anglicky</option>
+                            @endif
+                        @if ($book->language == "Cesky")
+                            <option value="Cesky" selected>Cesky</option>
+                        @else
+                            <option value="Cesky">Cesky</option>
+                            @endif
+                    </select>
                 </div>
             </div>
         </section>
@@ -206,7 +216,6 @@
             </div>
         </section>
         <script>
-            // document.getElementsByClassName("review-button").addEventListener("click", nieco);
             function change_text_button(){
                 if (document.getElementById("show_reviews_button").innerText == "Zobraziť viac") {
                     document.getElementById("show_reviews_button").innerText = "Zobraziť menej";
@@ -216,26 +225,6 @@
                 }
             }
 
-            // function nieco(e) {
-            // console.log(ev.parent);
-
-            // var ev = e || window.event;
-            // console.log(ev);
-            // if ( ev.innerText === "Zobraziť viac"){
-            //     ev.parent.getElementsByTagName("p")[0].classList.remove("three-rows");
-            // }
-            // else{
-
-            // }
-            // if (document.getElementById("review").classList.item(1) == "three-rows") {
-            //     document.getElementById("review").classList.remove("three-rows");
-            //     document.getElementById("review_button").innerText = "Zobraziť menej";
-            // }
-            // else{
-            //     document.getElementById("review").classList.add("three-rows")
-            //     document.getElementById("review_button").innerText = "Zobraziť viac";
-            // }
-            // }
         </script>
     </main>
 @endsection

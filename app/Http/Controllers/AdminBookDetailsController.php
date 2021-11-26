@@ -15,7 +15,8 @@ class AdminBookDetailsController extends Controller
 
         $book = Book::find($id);
         $reviews =  Review::where('book_id', $book->id)->get();
-        return view('admin.admin-book-details', ['reviews'=>$reviews, 'book'=>$book]);
+        $parent_categories =  Category::whereNull('parent_id')->get();
+        return view('admin.admin-book-details', ['reviews'=>$reviews, 'book'=>$book, 'main_categories'=>$parent_categories]);
     }
 
     public function index(Request $request){
@@ -64,13 +65,23 @@ class AdminBookDetailsController extends Controller
 
     public function destroy($id)
     {
-        $book_2 = Book::find($id);
-        $book_2->delete();
+        $book = Book::find($id);
+        $path = $book["photo_path"];
+        $books = Book::where('photo_path', $path)->get();
+        if (sizeof($books) == 1){
+            $unlink = unlink($path);
+            if (!$unlink){
+                session()->flash('message', 'Problém s vymazávaním obrázku');
+                return redirect()->back();
+            }
+        }
+        $book->delete();
         return redirect()->route('admin.index');
     }
 
     public function create(Request $request){
-        return view('admin.admin-book-details-new');
+        $parent_categories =  Category::whereNull('parent_id')->get();
+        return view('admin.admin-book-details-new', ['main_categories'=>$parent_categories]);
     }
 
     public function store(Request $request){
@@ -90,14 +101,16 @@ class AdminBookDetailsController extends Controller
             'stock_level' => 'required|integer',
             'image' => 'required|image',
             'author' => 'required',
-            'category' => 'required|integer',
+            'category' => 'required',
         ]);
-
-
         $path = $request->file('image')->store('uploads', 'public');
         //dd($request->file('image')->store('img', 'public'));
 
         $author = Author::where("name", $request->input('author'))->get()->first();
+
+        $category = Category::where("name",  $request->input('category'))->get()->first();
+        $category_id = $category->id;
+
         if ($author){
             $id = $author["id"];
         }
@@ -108,6 +121,7 @@ class AdminBookDetailsController extends Controller
             $author->save();
             $id = $author["id"];
         }
+
 
         $book = new Book([
                 'title' => $request->input('title'),
@@ -125,7 +139,7 @@ class AdminBookDetailsController extends Controller
                 'photo_path' => "storage/" . $path,
                 'active' => true,
                 'author_id' => $id,
-                'category_id' => $request->input('category'),
+                'category_id' => $category_id,
             ]
         );
         $book->save();
@@ -180,17 +194,15 @@ class AdminBookDetailsController extends Controller
     }
 
 
-    // path pri dvoch postoch.. netusim ako ..
-    // cas citania ?
-    // validacia na vsetko
-    // vymazanie reviews
-    // farba popisu
+    // TODO validacia na vsetko
 
     //TODO SIDE
     //TODO description  - stranka od ada
     //TODO description textarea cele zle - input
-    //TODO ten isty nazov pre knihu
-    // TODO selektor - automaticka hodnota ///// add proste automaticky
+    //TODO rozdelit javasript do osobitnych suborov
+    //TODO v navigacii pridat tlacidlo pre male obrazovky
+
+
 
 
     public function update(Request $request, $id)
@@ -207,13 +219,15 @@ class AdminBookDetailsController extends Controller
             'reading_time' => 'required|integer',
             'binding_type' => 'required',
             'language' => 'required',
-            'stock_level' => 'required|integer',
-            'image' => 'required|image',
             'author' => 'required',
-            'category' => 'required|integer',
+            'category' => 'required',
         ]);
 
         $author = Author::where("name", $request->input('author'))->get()->first();
+
+        $category = Category::where("name",  $request->input('category'))->get()->first();
+        $category_id = $category->id;
+
         if ($author){
             $id = $author["id"];
         }
@@ -235,7 +249,7 @@ class AdminBookDetailsController extends Controller
         $book['reading_time'] = (int)$request->input('reading_time');
         $book['publisher'] = $request->input('publisher');
         $book['language'] = $request->input('language');
-        $book['category_id'] = $request->input('category');
+        $book['category_id'] = $category_id;
         $book->save();
         $request->session()->flash('message', 'Kniha bola zmenená');
         return redirect()->route('admin.index');

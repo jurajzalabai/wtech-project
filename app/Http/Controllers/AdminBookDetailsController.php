@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -16,43 +17,53 @@ class AdminBookDetailsController extends Controller
             abort(404);
         }
         $reviews =  Review::where('book_id', $book->id)->get();
-        return view('admin.admin-book-details', ['reviews'=>$reviews, 'book'=>$book]);
+        $categories =  Category::all();
+        return view('admin.admin-book-details', ['reviews'=>$reviews, 'book'=>$book, 'categories'=>$categories]);
     }
 
     public function destroy($id)
     {
-        $book_2 = Book::find($id);
-        $book_2->delete();
+        $book = Book::find($id);
+        $path = $book["photo_path"];
+        $books = Book::where('photo_path', $path)->get();
+        if (sizeof($books) == 1){
+            $unlink = unlink($path);
+            if (!$unlink){
+                session()->flash('message', 'Problém s vymazávaním obrázku');
+                return redirect()->back();
+            }
+        }
+        $book->delete();
         return redirect()->route('home');
     }
 
     public function create(Request $request){
 
 //        dd($request->all());
-        $rules = array(
-            'title' => 'required',
-            'publisher' => 'required',
-            'description' => 'required',
-            'price' => 'required|integer',
-            'number_of_pages' => 'required|integer',
-            'rating' => 'required'|'integer',
-            'publish_date' => 'required|date',
-            'reading_time' => 'required|integer',
-            'binding_type' => 'required',
-            'language' => 'required',
-            'stock_level' => 'required|integer',
-            'image' => 'required|image',
-            'author' => 'required',
-            'category' => 'required|integer',
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails())
-        {
-            $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
-            return redirect()->back();
-        }
+//        $rules = array(
+//            'title' => 'required',
+//            'publisher' => 'required',
+//            'description' => 'required',
+//            'price' => 'required',
+//            'number_of_pages' => 'required',
+//            'rating' => 'required',
+//            'publish_date' => 'required',
+//            'reading_time' => 'required',
+//            'binding_type' => 'required',
+//            'language' => 'required',
+//            'stock_level' => 'required',
+//            'image' => 'required|image',
+//            'author' => 'required',
+//            'category' => 'required',
+//        );
+//
+//        $validator = Validator::make($request->all(), $rules);
+//
+//        if ($validator->fails())
+//        {
+//            $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
+//            return redirect()->back();
+//        }
 
         $path = $request->file('image')->store('uploads', 'public');
         //dd($request->file('image')->store('img', 'public'));
@@ -138,17 +149,14 @@ class AdminBookDetailsController extends Controller
     }
 
 
-    // path pri dvoch postoch.. netusim ako ..
-    // cas citania ?
-    // validacia na vsetko
-    // vymazanie reviews
-    // farba popisu
+    // TODO validacia na vsetko
+    // TODO vymazanie reviews
 
     //TODO SIDE
     //TODO description  - stranka od ada
     //TODO description textarea cele zle - input
-    //TODO ten isty nazov pre knihu
-    // TODO selektor - automaticka hodnota ///// add proste automaticky
+
+    //TODO selektor - automaticka hodnota ///// add proste automaticky
 
 
     public function change(Request $request)

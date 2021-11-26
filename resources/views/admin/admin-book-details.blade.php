@@ -66,10 +66,10 @@
                 <label for="author">Autor:</label><br>
                 <input id="author" name="author" required type="text" class="form-control rounded-pill form-width" value="{{$book->author->name}}"><br>
 
-                <label for="rating">rating:</label><br>
+                <label for="rating">Hodnotenie:</label><br>
                 <input id="rating" name="rating" required type="text" class="form-control rounded-pill form-width" value="{{$book->rating}}"><br>
 
-                <label for="price">Price:</label><br>
+                <label for="price">Cena:</label><br>
                 <input id="price" name="price" required type="number" class="form-control rounded-pill form-width" value="{{$book->price}}"><br>
 
             </section>

@@ -39,8 +39,8 @@ Route::put('cart/increment/{book}', [ShoppingCartController::class, 'incrementQu
 Route::put('cart/decrement/{book}', [ShoppingCartController::class, 'decrementQuantity'])->name('cart.decrement');
 
 Route::get('admin/new', [\App\Http\Controllers\AdminBookDetailsController::class, 'new'])->name('admin.new');
-Route::post('admin/{book}', [\App\Http\Controllers\AdminBookDetailsController::class, 'change'])->name('admin.change');
 Route::post('admin/create', [\App\Http\Controllers\AdminBookDetailsController::class, 'create'])->name('admin.create');
+Route::post('admin/{book}', [\App\Http\Controllers\AdminBookDetailsController::class, 'change'])->name('admin.change');
 Route::put('admin/picture', [\App\Http\Controllers\AdminBookDetailsController::class, 'picture'])->name('admin.picture');
 Route::resource('admin', \App\Http\Controllers\AdminBookDetailsController::class);
 Route::post('admin/', [\App\Http\Controllers\AdminBookDetailsController::class, 'review'])->name('admin.review');

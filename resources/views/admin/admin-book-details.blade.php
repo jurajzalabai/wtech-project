@@ -4,9 +4,24 @@
     <link href="{{asset('css/book_details_stylesheet.css') }}" rel="stylesheet">
 @endsection
 
+@section('navigation')
+    @include('layouts.admin-navigation')
+@endsection
+
 @section('content')
     <main class="container-md px-0">
         <div class="row book-main-info">
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="col-md-12 d-flex d-md justify-content-center pt-3">
                 <img id="book-image" src="{{asset($book->photo_path)}}" alt={{$book->title}}>
             </div>
@@ -48,8 +63,10 @@
 
             </div>
         </div>
-        <form method="post" action="{{ route('admin.change', $book)}}">
-            @csrf
+        <form method="post" action="{{ route('admin.update', $book->id)}}">
+            {{csrf_field()}}
+            {{method_field('PUT')}}
+
             <input type="hidden" id="id" name="id" value="{{$book->id}}">
             @if(Session::has('message'))
                 @if (Session::get('message') == 'Nesprávne ste vložili obrázok')
@@ -70,7 +87,7 @@
                 <input id="rating" name="rating" required type="text" class="form-control rounded-pill form-width" value="{{$book->rating}}"><br>
 
                 <label for="price">Cena:</label><br>
-                <input id="price" name="price" required type="number" class="form-control rounded-pill form-width" value="{{$book->price}}"><br>
+                <input id="price" name="price" required type="text" class="form-control rounded-pill form-width" value="{{$book->price}}"><br>
 
             </section>
         <section class="block-text mt-3">

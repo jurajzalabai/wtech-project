@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('auth.registration-main');
     }
 
     /**
@@ -57,6 +57,6 @@ class RegisteredUserController extends Controller
 
         //Auth::login($user);
 
-        return redirect('loginak');
+        return redirect('login');
     }
 }

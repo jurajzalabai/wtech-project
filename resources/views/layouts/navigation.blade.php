@@ -61,12 +61,12 @@
             </div>
 
             <form class="form-inline d-flex col-md-6" action="{{route('books.index')}}" method="GET">
-                <input class="form-control me-2 ml-2" name="search" type="search" placeholder="Zadajte názov knihy, kategóriu, autora...">
+                <input class="form-control me-2 ml-2" name="search" type="search" placeholder="Zadajte názov knihy, autora...">
                 <button class="btn btn-orange" type="submit">Hľadať</button>
             </form>
             <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end ">
                 @if (!Auth::check())
-                <button class="btn btn-orange px-md-2 py-1" onclick="location.href='{{ route('loginak')}}'" type="button">
+                <button class="btn btn-orange px-md-2 py-1" onclick="location.href='{{ route('login')}}'" type="button">
                     <i class="fa fa-user fa-lg h5"></i>
                     Prihlásiť
                 </button>

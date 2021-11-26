@@ -42,22 +42,15 @@ class DeliveryDetailsController extends Controller
             return redirect()->back();
         }
 
-        $rules = array(
+        $request->validate([
                 'name' => 'required', 'string:value',
                 'tel-number' => 'required', 'string:value',
                 'email' => 'required', 'email',
                 'city' => 'required', 'string:value',
                 'postal_code' => 'required', 'string:value',
                 'street' => 'required', 'string:value'
-        );
+        ]);
 
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails())
-        {
-            $request->session()->flash('message', 'Nevyplnili ste všetky potrebné údaje');
-            return redirect()->back();
-        }
 
 
         if (Auth::user()) {

@@ -4,9 +4,12 @@
     }
 }
 
+main{
+    min-height: 70vh;
+}
 
 body{
-    background-image: url('../../../../MAIN_PROJECT/xkabac_xzalabaij_projekt/wtech_project/img/BG.jpg');
+    background-image: url('../img/BG.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

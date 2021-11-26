@@ -3,6 +3,10 @@
     <link href="{{asset('css/form_stylesheet.css') }}" rel="stylesheet">
 @endsection
 
+@section('navigation')
+    @include('layouts.navigation')
+@endsection
+
 @section('content')
 <main class=" container justify-content-center pt-5">
     <section class="sign-in">
@@ -30,7 +34,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 Nemáte účet ? &emsp;&emsp;
-                <a href="{{route('registrak')}}">
+                <a href="{{route('register')}}">
                     Zaregistrujte sa
                 </a>
             </div>

@@ -4,6 +4,9 @@
     <link href="{{asset('css/main_pages_stylesheet.css') }}" rel="stylesheet">
 @endsection
 
+@section('navigation')
+    @include('layouts.navigation')
+@endsection
 
 @section('content')
 <main class="container-md px-0">

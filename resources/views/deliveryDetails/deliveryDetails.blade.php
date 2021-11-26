@@ -4,14 +4,27 @@
     <link href="{{asset('css/form_stylesheet.css') }}" rel="stylesheet">
 @endsection
 
+@section('navigation')
+    @include('layouts.navigation')
+@endsection
 
 @section('content')
     <main>
+
         <form method="POST"  action="{{route('deliveryDetails.store')}}">
             {{ csrf_field() }}
             <input type="hidden" id="shipping" name="doprava" value="{{$doprava}}">
             <input type="hidden" id="payment" name="platba" value="{{$platba}}">
         <div class="container justify-content-center pt-5">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <section class="delivery-details">
                 @if(Session::has('message'))
                     <p class="alert alert-danger">{{ Session::get('message') }}</p>

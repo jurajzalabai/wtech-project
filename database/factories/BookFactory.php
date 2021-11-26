@@ -26,7 +26,7 @@ class BookFactory extends Factory
             'rating' => $this->faker->numberBetween(1, 5),
             'sold_count' => $this->faker->numberBetween(0, 10000),
             'publish_date' => $this->faker->dateTime,
-            'reading_time' => $this->faker->dateTime,
+            'reading_time' => $this->faker->numberBetween(0,48),
             'binding_type' => Arr::random($bindingTypes),
             'language' => Arr::random($languages),
             'stock_level' => $this->faker->numberBetween(0,1000),

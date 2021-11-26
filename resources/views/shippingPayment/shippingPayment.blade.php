@@ -4,6 +4,10 @@
     <link href="{{asset('css/form_stylesheet.css') }}" rel="stylesheet">
 @endsection
 
+@section('navigation')
+    @include('layouts.navigation')
+@endsection
+
 @section('content')
     <form method="GET"  action="{{route('shippingPayment.create')}}">
         {{ csrf_field() }}

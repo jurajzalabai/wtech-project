@@ -75,7 +75,6 @@
                 <p class="alert alert-success">{{ Session::get('message') }}</p>
                 @endif
             @endif
-            <button id="change_book" class="btn basic-button" type="submit" style="font-weight: bold">Zmenit</button>
             <section  class="col-12 d-block justify-content-center">
                 <label for="title">Názov:</label><br>
                 <input id="title" name="title" required type="text" class="form-control rounded-pill form-width" value="{{$book->title}}"><br>
@@ -165,6 +164,9 @@
                 </div>
             </div>
         </section>
+            <div class="d-flex justify-content-center mt-5">
+                <button id="change_book" class="btn basic-button py-2 px-5" type="submit" style="font-weight: bold;">Zmeniť</button>
+            </div>
         </form>
         <section class="mt-3">
             <h2>Recenzie</h2>
@@ -191,14 +193,14 @@
                 </form>
                 @if((count($reviews)))
                     @foreach($reviews as $k=>$review)
-                        @include('components.review')
+                        @include('components.review-admin')
                     @endforeach
                     <div class="d-flex justify-content-center" style="background: none">
                         <button class="btn basic-button" id="show_reviews_button" onclick="change_text_button()" data-bs-toggle="collapse" data-bs-target=".review.collapse" style="font-weight: bold" type="button">Zobraziť viac</button>
                     </div>
                 @else
                     <div class="d-flex justify-content-center">
-                        <h3 class="mt-2 h5">Žiande recenzie na zobrazenie</h3>
+                        <h3 class="mt-2 h5">Žiadne recenzie na zobrazenie</h3>
                     </div>
                 @endif
             </div>

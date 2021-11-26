@@ -50,7 +50,6 @@
                     <p class="alert alert-success">{{ Session::get('message') }}</p>
                 @endif
             @endif
-            <button id="change_book" class="btn basic-button" type="submit" style="font-weight: bold">Pridať knihu</button>
             <section  class="col-12 d-block justify-content-center">
                 <label for="title">Názov:</label><br>
                 <input id="title" name="title" required type="text" value="{{old('title')}}" class="form-control rounded-pill form-width"><br>
@@ -135,6 +134,9 @@
                     </div>
                 </div>
             </section>
+                <div class="d-flex justify-content-center mt-5">
+                    <button id="change_book" class="btn basic-button py-2 px-5" type="submit" style="font-weight: bold">Pridať knihu</button>
+                </div>
 {{--        <section class="mt-3">--}}
 {{--            <h2>Recenzie</h2>--}}
 {{--            <div class="block-text p-3" style="background-color: #e8d2b7; border-radius: 10px">--}}

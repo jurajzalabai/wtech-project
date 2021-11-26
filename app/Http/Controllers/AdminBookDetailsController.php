@@ -170,6 +170,15 @@ class AdminBookDetailsController extends Controller
         return redirect()->back();
     }
 
+    public function deleteReview($review_id){
+        $review=Review::find($review_id);
+        if(!$review){
+            abort(404);
+        }
+        $review->delete();
+        return redirect()->back();
+    }
+
 
     // path pri dvoch postoch.. netusim ako ..
     // cas citania ?

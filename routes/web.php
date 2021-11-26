@@ -44,6 +44,6 @@ Route::put('cart/decrement/{book}', [ShoppingCartController::class, 'decrementQu
 Route::put('admin/picture', [\App\Http\Controllers\AdminBookDetailsController::class, 'picture'])->name('admin.picture')->middleware('admin');
 Route::resource('admin', \App\Http\Controllers\AdminBookDetailsController::class)->middleware('admin');
 Route::post('admin/add-review', [\App\Http\Controllers\AdminBookDetailsController::class, 'review'])->name('admin.review')->middleware('admin');
-
+Route::delete('admin/remove-review/{review}', [\App\Http\Controllers\AdminBookDetailsController::class, 'deleteReview'])->name('admin.remove-review')->middleware('admin');
 
 require __DIR__.'/auth.php';

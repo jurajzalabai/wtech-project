@@ -36,7 +36,7 @@
                     <p class="alert alert-success">{{ Session::get('message') }}</p>
                 @endif
             @endif
-            <button id="change_book" class="btn basic-button" type="submit" style="font-weight: bold">Pridať knihu</button>
+
             <section  class="block-text col-12 d-block justify-content-center">
                 <div class="p-4">
                 <label for="title">Názov:</label><br>
@@ -110,7 +110,11 @@
                     </div>
                 </div>
             </section>
+                <div class="d-flex justify-content-center mt-5">
+                    <button id="change_book" class="btn basic-button py-2 px-5" type="submit" style="font-weight: bold">Pridať knihu</button>
+                </div>
         </div>
+
         </form>
     </main>
 @endsection

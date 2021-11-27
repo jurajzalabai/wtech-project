@@ -184,15 +184,25 @@ class AdminBookDetailsController extends Controller
         return redirect()->back();
     }
 
+    public function deleteReview($review_id){
+        $review=Review::find($review_id);
+        if(!$review){
+            abort(404);
+        }
+        $review->delete();
+        return redirect()->back();
+    }
+
 
     // TODO validacia na vsetko
-    // TODO vymazanie reviews
 
     //TODO SIDE
     //TODO description  - stranka od ada
     //TODO description textarea cele zle - input
+    //TODO rozdelit javasript do osobitnych suborov
+    //TODO v navigacii pridat tlacidlo pre male obrazovky
 
-    //TODO selektor - automaticka hodnota ///// add proste automaticky
+
 
 
     public function update(Request $request, $id)

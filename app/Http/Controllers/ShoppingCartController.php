@@ -85,6 +85,10 @@ class ShoppingCartController extends Controller
             abort(404);
         }
 
+        if ($book['stock_level'] < $request->quantity){
+            $request->session()->flash('message', 'Nedostatočný počet kníh na sklade');
+            return redirect()->route('cart.index');
+        }
 
         $price = $book->price * $quantity;
 
@@ -147,6 +151,10 @@ class ShoppingCartController extends Controller
             $cart = $this->getCart();
             if(isset($cart[$id])){
                 $book = Book::find($id);
+                if ($book['stock_level'] < $request->quantity){
+                    $request->session()->flash('message', 'Nedostatočný počet kníh na sklade');
+                    return redirect()->route('cart.index');;
+                }
                 $cart[$id]['quantity'] = $request->quantity;
                 $cart[$id]['price'] = $cart[$id]['quantity'] * $book->price;
                 $this->storeCart($cart);
@@ -160,6 +168,10 @@ class ShoppingCartController extends Controller
         $cart = $this->getCart();
         if(isset($cart[$id])){
             $book = Book::find($id);
+            if ($book['stock_level'] < $cart[$id]['quantity'] + 1){
+                $request->session()->flash('message', 'Nedostatočný počet kníh na sklade');
+                return redirect()->back();
+            }
             $cart[$id]['quantity'] += 1;
             $cart[$id]['price'] = $cart[$id]['quantity'] * $book->price;
             $this->storeCart($cart);

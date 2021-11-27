@@ -115,8 +115,10 @@
 
                 </div>
                 <div class="col-5 col-sm-4 d-flex justify-content-end">
-                    <button class="btn basic-button" type="submit">
-                        Pokračovať</button>
+                    <div>
+                        <button class="btn basic-button" type="submit">
+                            Pokračovať</button>
+                    </div>
                 </div>
             </div>
         </main>

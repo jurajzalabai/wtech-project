@@ -13,6 +13,9 @@
         <h1>
             Nákupný košík
         </h1>
+        @if(Session::has('message'))
+            <p class="alert alert-danger">{{ Session::get('message') }}</p>
+        @endif
             @foreach($cart as $cart_item)
                 @include('components.shoppingCartItem')
             @endforeach

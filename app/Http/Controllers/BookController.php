@@ -16,6 +16,8 @@ class BookController extends Controller
 
     public function index(Request $request){
 
+        $books = Book::where('active', true);
+
         $category = Category::find(request()->category);
 
         if(request()->category){
@@ -23,12 +25,12 @@ class BookController extends Controller
                 abort(404);
 
             if($category->parent_id==null){
-                $books = Book::with('category')->whereHas('category', function($query){
+                $books = $books->with('category')->whereHas('category', function($query){
                     $query->where('parent_id', request()->category);
                 });
             }
             else{
-                $books = Book::with('category')->whereHas('category', function($query){
+                $books = $books->with('category')->whereHas('category', function($query){
                     $query->where('id', request()->category);
                 });
             }
@@ -36,7 +38,7 @@ class BookController extends Controller
             $categoryName = $category->name;
         }
         else{
-            $books = Book::with('category');
+            $books = $books->with('category');
             $categoryName = 'Všetky knihy';
         }
 

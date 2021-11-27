@@ -16,7 +16,7 @@ class BookFactory extends Factory
     {
         $bindingTypes = ['Pevna vazba', 'Makka vazba'];
         $languages = ['Slovensky', 'Cesky', 'Anglicky', 'Polsky'];
-        $photoPaths = ['img/book1.png', 'img/book2.png', 'img/book3.png'];
+        $photoPaths = ['storage/upload/book1.png', 'img/book2.png', 'img/book3.png'];
         return [
             'title' => $this->faker->realText(64),
             'publisher' => $this->faker->company,
@@ -31,7 +31,7 @@ class BookFactory extends Factory
             'language' => Arr::random($languages),
             'stock_level' => $this->faker->numberBetween(0,1000),
             'photo_path' => Arr::random($photoPaths),
-            'active' => $this->faker->boolean,
+            'active' => ($this->faker->numberBetween(0,100) > 8),
             'author_id' => $this->faker->numberBetween(1,50),
             'category_id' => $this->faker->numberBetween(4,19),
         ];

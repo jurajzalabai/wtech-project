@@ -86,6 +86,7 @@ class DeliveryDetailsController extends Controller
         foreach ($cart as $item) {
             $book = Book::find($item["book_id"]);
             $book["sold_count"] += $item["quantity"];
+            $book["stock_level"] -= $item["quantity"];
             $book->save();
         }
         $this->deleteCart();

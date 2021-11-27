@@ -118,10 +118,17 @@
             <div class="col-12 col-sm-6">
                 Dátum vydania: {{$book->publish_date}}<br>
                 Väzba: {{$book->binding_type}}<br>
-                Počet strán: {{$book->number_of_pages}}
+                Počet strán: {{$book->number_of_pages}}<br>
+                @if ($book->stock_level < 10)
+                Počet na kníh sklade: {{$book->stock_level}}
+                @elseif($book->stock_level < 100)
+                Počet na kníh sklade: 10+
+                @else
+                Počet na kníh sklade: 100+
+                @endif
             </div>
             <div class="col-12 col-sm-6">
-                Čas čítania: {{$book->reading_time}}<br>
+                Čas čítania: {{$book->reading_time}} hodín<br>
                 Vydavateľstvo: {{$book->publisher}}<br>
                 Jazyk: {{$book->language}}
             </div>

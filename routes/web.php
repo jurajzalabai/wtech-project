@@ -45,5 +45,6 @@ Route::put('admin/picture', [\App\Http\Controllers\AdminBookDetailsController::c
 Route::resource('admin', \App\Http\Controllers\AdminBookDetailsController::class)->middleware('admin');
 Route::post('admin/add-review', [\App\Http\Controllers\AdminBookDetailsController::class, 'review'])->name('admin.review')->middleware('admin');
 Route::delete('admin/remove-review/{review}', [\App\Http\Controllers\AdminBookDetailsController::class, 'deleteReview'])->name('admin.remove-review')->middleware('admin');
+Route::delete('admin/remove-image/{book}', [\App\Http\Controllers\AdminBookDetailsController::class, 'deleteImage'])->name('admin.remove-image')->middleware('admin');
 
 require __DIR__.'/auth.php';

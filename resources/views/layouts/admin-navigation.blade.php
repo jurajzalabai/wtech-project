@@ -50,10 +50,6 @@
                             <li style="overflow: hidden; text-overflow: ellipsis; margin-left: 10px; max-width: 200px;  height: 1.5em;"><b>{{Auth::user()->name}}</b></li>
                             <li><a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a></li>
                         </ul>
-
-                        {{--                        <button class="btn-orange"  aria-labelledby="dropdownMenuButton">--}}
-                        {{--                            <a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a>--}}
-                        {{--                        </button>--}}
                     </div>
             </div>
         </div>

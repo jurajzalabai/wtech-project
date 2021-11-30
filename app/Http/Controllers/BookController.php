@@ -67,7 +67,7 @@ class BookController extends Controller
             $books = $books->where('price', '<=', $price_to);
         }
 
-        $order_by = request()->input('order_by','price_asc');
+        $order_by = request()->input('order_by');
         switch ($order_by){
             case 'newest':
                 $books = $books->orderBy('created_at');
@@ -75,14 +75,15 @@ class BookController extends Controller
             case 'top_selling':
                 $books = $books->orderBy('sold_count');
                 break;
-            default:
+            case 'price_asc':
                 $books = $books->orderBy('price');
+                break;
+            case 'price_desc':
+                $books = $books->orderBy('price', 'DESC');
                 break;
         }
 
         $books = $books->paginate(10);
-
-
 
         return view('books.index', [
             'books'=>$books,

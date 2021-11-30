@@ -43,12 +43,19 @@
                                 @case('top_selling')
                                     Najpredávanejšie
                                     @break
+                                @case('price_desc')
+                                    Najdrahšie
+                                    @break
+                                @default
+                                    Zoradiť podľa
+                                    @break
                             @endswitch
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'price_asc']))}}'>Najlacnejšie</a></li>
-                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'top_selling']))}}'>Najpredávanejšie</a></li>
-                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'newest']))}}'>Najnovšie</a></li>
+                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'price_asc']))}}' style="margin-left: 0">Najlacnejšie</a></li>
+                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'price_desc']))}}' style="margin-left: 0">Najdrahšie</a></li>
+                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'top_selling']))}}' style="margin-left: 0">Najpredávanejšie</a></li>
+                            <li><a class="dropdown-item" href='{{route('books.index',array_merge(request()->all(),['order_by'=>'newest']))}}' style="margin-left: 0">Najnovšie</a></li>
                         </ul>
                     </div>
                 </div>
@@ -65,9 +72,13 @@
             @endforeach
 
 
-            <nav class="my-5 d-flex justify-content-center">
+            <nav class="my-5 d-flex justify-content-center d-md-flex d-none">
                 {!! $books->appends(request()->input())->links() !!}
             </nav>
+            <nav class="d-md-none my-5 d-flex justify-content-center">
+                {!! $books->onEachSide(0)->appends(request()->input())->links() !!}
+            </nav>
+
         </section>
     </div>
 </main>

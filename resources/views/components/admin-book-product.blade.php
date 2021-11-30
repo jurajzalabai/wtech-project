@@ -1,12 +1,14 @@
 <section class="row product-listing mx-1">
     <div class="col-4 col-sm-2 m-auto text-center p-0">
         <a href={{route('books.show', $book->id)}}>
-            <img src="{{asset($book->photo_path)}}" alt="{{$book->title}} kniha" class="img-fluid book-photo">
+            <img src="{{asset(env('IMG_PATH').$book->photo_path)}}" alt="{{$book->title}} kniha" class="img-fluid book-photo">
         </a>
     </div>
     <div class="col-8 col-sm-7 pe-0">
-        <h2 class="book-title-listings" onclick="location.href='{{route('books.show', $book->id)}}'">
+        <h2 class="book-title-listings">
+            <a href="{{route('books.show', $book->id)}}">
                 {{$book->title}}
+            </a>
         </h2>
         <p class="author">{{$book->author->name}}</p>
         <p class="description">{{$book->description}}</p>

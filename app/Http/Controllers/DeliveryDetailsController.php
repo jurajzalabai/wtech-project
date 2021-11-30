@@ -43,12 +43,12 @@ class DeliveryDetailsController extends Controller
         }
 
         $request->validate([
-                'name' => 'required', 'string:value',
-                'tel-number' => 'required', 'string:value',
-                'email' => 'required', 'email',
-                'city' => 'required', 'string:value',
-                'postal_code' => 'required', 'string:value',
-                'street' => 'required', 'string:value'
+                'name' => 'required|string:value||max:255',
+                'tel-number' => 'required|string:value|max:255',
+                'email' => 'required|email|max:255',
+                'city' => 'required|string:value||max:255',
+                'postal_code' => 'required|string:value|max:255',
+                'street' => 'required|string:value|max:255'
         ]);
 
 

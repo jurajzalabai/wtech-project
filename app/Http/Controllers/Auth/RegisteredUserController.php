@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
             'city' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'string', 'max:255'],
             'street' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'numeric', 'min:10'],
+            'phone_number' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

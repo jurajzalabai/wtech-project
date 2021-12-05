@@ -56,9 +56,7 @@
                 <h2 class="mt-4">Popis</h2>
                 <div class="p-3 ">
                     <label for="book_description"></label>
-                    <textarea id="book_description" rows="5" name="description"  class="form-control form-width">
-                        {{old('description')}}
-                    </textarea>
+                    <textarea id="book_description" rows="5" name="description"  class="form-control form-width">{{old('description')}}</textarea>
                 </div>
             </section>
             <section class="block-text mt-3">

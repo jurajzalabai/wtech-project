@@ -138,7 +138,7 @@ class AdminBookDetailsController extends Controller
                 'binding_type' => $request->input('binding_type'),
                 'language' => $request->input('language'),
                 'stock_level' => $request->input('stock_level'),
-                'photo_path' => "storage/" . $path,
+                'photo_path' =>  basename($path),
                 'active' => true,
                 'author_id' => $id,
                 'category_id' => $category_id,
@@ -163,6 +163,7 @@ class AdminBookDetailsController extends Controller
             $request->session()->flash('message', 'Nesprávne ste vložili obrázok');
             return redirect()->back();
         }
+        $this->deleteImage($request->input('id'));
 
         $book = Book::find($request->input('id'));
         $path = $request->file('image')->store(

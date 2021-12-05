@@ -33,8 +33,11 @@
                 @endforeach
 
 
-                <nav class="my-5 d-flex justify-content-center">
+                <nav class="my-5 d-flex justify-content-center d-md-flex d-none">
                     {!! $books->appends(request()->input())->links() !!}
+                </nav>
+                <nav class="d-md-none my-5 d-flex justify-content-center">
+                    {!! $books->onEachSide(0)->appends(request()->input())->links() !!}
                 </nav>
             </section>
         </div>

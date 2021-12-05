@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Author::factory()->count(50)->create();
-        Book::factory()->count(100)->create();
+        Book::factory()->count(238)->create();
         Review::factory()->count(500)->create();
         $this->createCategories();
     }

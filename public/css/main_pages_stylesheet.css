@@ -40,15 +40,15 @@ header.top-nav{
     margin-left: 2rem;
 }
 
-.dropdown li a::before{
+.books-dropdown li a::before{
     content: ' • ';
 }
 
-.dropdown li a.h5::before{
+.books-dropdown li a.h5::before{
     content: none;
 }
 
-.dropdown li a.h5{
+.books-dropdown li a.h5{
     list-style-type: none;
 }
 

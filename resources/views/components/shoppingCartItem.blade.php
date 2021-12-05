@@ -1,7 +1,7 @@
 <section class="row py-3 px-sm-3 mb-5">
     <div class="col-12 col-sm-3 col-md-2">
         <div class="d-flex justify-content-center">
-            <img class="book-image" src="{{asset($cart_item['photo_path'])}}" alt="{{$cart_item['title']}} kniha" >
+            <img class="book-image" src="{{asset(env('IMG_PATH').$cart_item['photo_path'])}}" alt="{{$cart_item['title']}} kniha" >
         </div>
     </div>
     <div class="col-12 col-sm-9 col-md-7">

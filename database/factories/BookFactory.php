@@ -16,7 +16,7 @@ class BookFactory extends Factory
     {
         $bindingTypes = ['Pevna vazba', 'Makka vazba'];
         $languages = ['Slovensky', 'Cesky', 'Anglicky', 'Polsky'];
-        $photoPaths = ['storage/uploads/book1.png', 'storage/uploads/book2.png', 'storage/uploads/book3.png'];
+        $photoPaths = ['book1.png', 'book2.png', 'book3.png'];
         return [
             'title' => $this->faker->realText(64),
             'publisher' => $this->faker->company,

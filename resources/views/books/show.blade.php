@@ -25,7 +25,7 @@
     </div>
     <div class="row book-main-info">
         <div class="col-md-3 col-12 d-flex d-md justify-content-center">
-            <img id="book-image" src="{{asset($book->photo_path)}}" alt={{$book->title}}>
+            <img id="book-image" src="{{asset(env('IMG_PATH').$book->photo_path)}}" alt={{$book->title}}>
         </div>
         <section  class="col-md-9 col-sm-12">
             <h1 class="pb-4 three-rows">
@@ -99,7 +99,7 @@
             </div>
             <script>
                 function show_more() {
-                    if (document.getElementById("book_description").classList.item(1) == "thirteen-rows") {
+                    if (document.getElementById("book_description").classList.item(1) === "thirteen-rows") {
                         document.getElementById("book_description").classList.remove("thirteen-rows");
                         document.getElementById("show_more_button").innerText = "Zobraziť menej";
                     }

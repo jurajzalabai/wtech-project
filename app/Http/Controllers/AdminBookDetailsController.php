@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Validator;
 class AdminBookDetailsController extends Controller
 {
     public function edit(Request $request, $id){
-
         $book = Book::find($id);
         $reviews =  Review::where('book_id', $book->id)->get();
         $parent_categories =  Category::whereNull('parent_id')->get();
@@ -68,11 +67,14 @@ class AdminBookDetailsController extends Controller
         $book = Book::find($id);
         $path = $book["photo_path"];
         $books = Book::where('photo_path', $path)->get();
+        $path = env('IMG_PATH').$path;
         if (sizeof($books) == 1){
-            $unlink = unlink($path);
-            if (!$unlink){
-                session()->flash('message', 'Problém s vymazávaním obrázku');
-                return redirect()->back();
+            if(file_exists($path) && !is_dir($path)) {
+                $unlink = unlink($path);
+                if (!$unlink) {
+                    session()->flash('message', 'Problém s vymazávaním obrázku');
+                    return redirect()->back();
+                }
             }
         }
         $book->delete();
@@ -88,20 +90,20 @@ class AdminBookDetailsController extends Controller
 
 //        dd($request->all());
         $request->validate([
-            'title' => 'required',
-            'publisher' => 'required',
+            'title' => 'required|max:255',
+            'publisher' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric',
             'number_of_pages' => 'required|integer',
-            'rating' => 'required|integer|between:1,5',
+            'rating' => 'required|numeric|between:1,5',
             'publish_date' => 'required|date',
             'reading_time' => 'required|integer',
-            'binding_type' => 'required',
-            'language' => 'required',
+            'binding_type' => 'required|max:255',
+            'language' => 'required|max:255',
             'stock_level' => 'required|integer',
             'image' => 'required|image',
-            'author' => 'required',
-            'category' => 'required',
+            'author' => 'required|max:255',
+            'category' => 'required|max:255',
         ]);
         $path = $request->file('image')->store('uploads', 'public');
         //dd($request->file('image')->store('img', 'public'));
@@ -163,8 +165,10 @@ class AdminBookDetailsController extends Controller
         }
 
         $book = Book::find($request->input('id'));
-        $path = "storage/" . $request->file('image')->store('uploads', 'public');
-        $book['photo_path'] = $path;
+        $path = $request->file('image')->store(
+            'uploads', 'public'
+        );
+        $book['photo_path'] = basename($path);
         $book->save();
         $request->session()->flash('message', 'Obrázok bol zmenený');
         return redirect()->back();
@@ -204,18 +208,18 @@ class AdminBookDetailsController extends Controller
     {
         $book = Book::find($id);
         $request->validate([
-            'title' => 'required',
-            'publisher' => 'required',
+            'title' => 'required|max:255',
+            'publisher' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|numeric',
             'number_of_pages' => 'required|integer',
-            'rating' => 'required|integer|between:1,5',
+            'rating' => 'required|numeric|between:1,5',
             'publish_date' => 'required|date',
             'reading_time' => 'required|integer',
-            'binding_type' => 'required',
-            'language' => 'required',
-            'author' => 'required',
-            'category' => 'required',
+            'binding_type' => 'required|max:255',
+            'language' => 'required|max:255',
+            'author' => 'required|max:255',
+            'category' => 'required|max:255',
         ]);
 
         $author = Author::where("name", $request->input('author'))->get()->first();
@@ -249,4 +253,24 @@ class AdminBookDetailsController extends Controller
         $request->session()->flash('message', 'Kniha bola zmenená');
         return redirect()->back();
     }
+
+    public function deleteImage($id){
+        $book = Book::find($id);
+        $path = $book["photo_path"];
+        $books = Book::where('photo_path', $path)->get();
+        $path = env('IMG_PATH').$path;
+        if (sizeof($books) == 1){
+            if(file_exists($path) && !is_dir($path)) {
+                $unlink = unlink($path);
+                if (!$unlink) {
+                    session()->flash('message', 'Problém s vymazávaním obrázku');
+                    return redirect()->back();
+                }
+            }
+        }
+        $book['photo_path']="";
+        $book->save();
+        return redirect()->back();
+    }
+
 }

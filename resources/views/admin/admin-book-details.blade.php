@@ -23,9 +23,9 @@
             @endif
 
             <div class="col-md-12 d-flex d-md justify-content-center pt-3">
-                <img id="book-image" src="{{asset($book->photo_path)}}" alt={{$book->title}}>
+                <img id="book-image" src="{{asset(env('IMG_PATH').$book->photo_path)}}" alt={{$book->title}}>
             </div>
-            <div class="d-flex justify-content-around py-5">
+            <div class="d-flex justify-content-around pb-2 pt-4">
                 <form action="{{route('admin.picture')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
@@ -36,13 +36,41 @@
 
                     <button id="add_picture_button" class="btn basic-button" type="submit" style="font-weight: bold">Pridať obrázok</button>
                 </form>
+                <form action="{{route('admin.remove-image', $book->id)}}" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button class="mt-2 btn basic-button" data-bs-toggle="modal" data-bs-target="#confirmationPopup{{$book->id}}" type="button" style="font-size: 1.7em; background-color: unset;" >
+                        <i class="fa fa-trash"></i></button>
+
+                    <div class="modal fade" id="confirmationPopup{{$book->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Potvrdenie</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Naozaj chcete vymazať tento obrázok ?
+                                </div>
+                                <div class="modal-footer d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
+                                    <button type="submit" class="btn btn-primary">Áno, chcem ho vymazať</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
                 <form action="{{route('admin.destroy', $book->id)}}" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button class="mt-2 btn basic-button" data-bs-toggle="modal" data-bs-target="#confirmationPopup{{$book->book_id}}" type="button" style="font-size: 1.7em; background-color: unset;" >
-                        <i class="fa fa-trash"></i></button>
+                    <button class="mt-2 btn basic-button" data-bs-toggle="modal" data-bs-target="#confirmationPopup2{{$book->id}}" type="button" >
+                        <i class="fa fa-trash"></i>
+                        Odstrániť knihu
+                    </button>
 
-                    <div class="modal fade" id="confirmationPopup{{$book->book_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="confirmationPopup2{{$book->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -60,9 +88,8 @@
                         </div>
                     </div>
                 </form>
-
             </div>
-        </div>
+        </div >
         <form method="post" action="{{ route('admin.update', $book->id)}}">
             {{csrf_field()}}
             {{method_field('PUT')}}
@@ -96,7 +123,8 @@
             <h2 class="mt-4">Popis</h2>
             <div class="p-3 ">
                 <label for="book_description"></label>
-                <input id="description" name="description" type="text" class="form-control rounded-pill form-width" value="{{$book->description}}">
+                <textarea id="book_description" rows="5" name="description"  class="form-control form-width">{{$book->description}}
+                </textarea>
             </div>
         </section>
         <section class="block-text mt-3">

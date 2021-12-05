@@ -4,6 +4,46 @@
             <img src="{{asset('img/whitelogo3.png')}}" alt="BookStore logo" class="logo">
         </a>
 
+        <form class="form-inline d-none d-md-none d-sm-flex col-sm-8" action="{{route('books.index')}}" method="GET">
+            <input class="form-control me-2 ml-2" name="search" type="search" placeholder="Zadajte názov knihy, autora...">
+            <button class="btn btn-orange" type="submit">Hľadať</button>
+        </form>
+
+{{--        <div class="d-flex col mt-md-0 mt-3 text-center text-md-end">--}}
+            @if (!Auth::check())
+                <button class="btn col text-center mt-1 d-block d-sm-none" onclick="location.href='{{route('login')}}'" type="button">
+                    <i class="fa fa-user fa-2x h5 p-2" style="color:rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.1); border-radius:5px; margin-bottom: 0;"></i>
+                </button>
+
+            @else
+
+                <div class="dropdown col text-center d-block d-sm-none" style=" display: inline-flex;">
+                    <button class="btn text-center mt-1" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+                        <i class="fa fa-user fa-2x h5 p-2" style="color:rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.1); border-radius:5px; margin-bottom: 0;"></i>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-lg-end btn-block"  aria-labelledby="dropdownMenuButton2">
+                        <li style="overflow: hidden; text-overflow: ellipsis; margin-left: 10px; max-width: 200px;  height: 1.5em;"><b>{{Auth::user()->name}}</b></li>
+                        <li><a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a></li>
+                    </ul>
+
+                </div>
+            @endif
+
+
+            <button class="btn col text-center me-2 mt-1 d-block d-sm-none" onclick="location.href='{{route('cart.index')}}'" type="button">
+                <i class="fa fa-shopping-cart fa-2x h5 p-2" style="color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.1); border-radius:5px; margin-bottom: 0;"></i>
+            </button>
+{{--        </div>--}}
+
+
+{{--        <div class="col-6 col-md-4 mt-md-0 mt-3 text-center d-md-none">--}}
+{{--            <button class="btn btn-orange py-1 me-md-1" onclick="location.href='{{route('cart.index')}}'" type="button">--}}
+{{--                <i class="fa fa-shopping-cart fa-lg h5"></i>--}}
+{{--                Košík--}}
+{{--            </button>--}}
+{{--        </div>--}}
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,41 +70,17 @@
                             @endforeach
                             </ul>
                         @endforeach
-{{--                        <ul class="col-12 col-sm-6 col-lg-4 ">--}}
-{{--                            <li><a href="listing.html" class="h5">Beletria</a></li>--}}
-{{--                            <li><a href="listing.html">Slovenská beletria</a></li>--}}
-{{--                            <li><a href="listing.html">Detektívky</a></li>--}}
-{{--                            <li><a href="listing.html">Sci-fi</a></li>--}}
-{{--                            <li><a href="listing.html">Historické</a></li>--}}
-{{--                            <li><a href="listing.html">Klasika</a></li>--}}
-{{--                            <li><a href="listing.html">Romantika</a></li>--}}
-{{--                        </ul>--}}
-{{--                        <ul class="col-12 col-sm-6 col-lg-4 ">--}}
-{{--                            <li><a href="listing.html" class="h5">Náučná literatúra</a></li>--}}
-{{--                            <li><a href="listing.html">História</a></li>--}}
-{{--                            <li><a href="listing.html">Technika</a></li>--}}
-{{--                            <li><a href="listing.html">Zdravie a životný štýl</a></li>--}}
-{{--                            <li><a href="listing.html">Hobby</a></li>--}}
-{{--                            <li><a href="listing.html">Motivačná literatúra</a></li>--}}
-{{--                        </ul>--}}
-{{--                        <ul class="col-12 col-sm-6 col-md-4 ">--}}
-{{--                            <li><a href="listing.html" class="h5">Pre deti a mládež</a></li>--}}
-{{--                            <li><a href="listing.html">Pre najmenších</a></li>--}}
-{{--                            <li><a href="listing.html">Pre prvákov</a></li>--}}
-{{--                            <li><a href="listing.html">Pre teenagerov</a></li>--}}
-{{--                            <li><a href="listing.html">Sci-fi, fantasy</a></li>--}}
-{{--                        </ul>--}}
 
                     </nav>
 
                 </div>
             </div>
 
-            <form class="form-inline d-flex col-md-6" action="{{route('books.index')}}" method="GET">
+            <form class="form-inline col-md-6 d-flex d-sm-none d-md-flex" action="{{route('books.index')}}" method="GET">
                 <input class="form-control me-2 ml-2" name="search" type="search" placeholder="Zadajte názov knihy, autora...">
                 <button class="btn btn-orange" type="submit">Hľadať</button>
             </form>
-            <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end ">
+            <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end d-none d-sm-block">
                 @if (!Auth::check())
                 <button class="btn btn-orange px-md-2 py-1" onclick="location.href='{{ route('login')}}'" type="button">
                     <i class="fa fa-user fa-lg h5"></i>
@@ -73,23 +89,20 @@
 
                 @else
 
-                    <div class="dropdown text-center" style=" display: inline-flex;">
-                        <button class="btn-orange px-md-2 py-1 btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-user fa-lg h5"></i>
-                            Profil
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-lg-end btn-block"  aria-labelledby="dropdownMenuButton1">
-                            <li style="overflow: hidden; text-overflow: ellipsis; margin-left: 10px; max-width: 200px;  height: 1.5em;"><b>{{Auth::user()->name}}</b></li>
-                            <li><a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a></li>
-                        </ul>
+                <div class="dropdown text-center" style=" display: inline-flex;">
+                    <button class="btn-orange px-md-2 py-1 btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-user fa-lg h5"></i>
+                        Profil
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-lg-end btn-block"  aria-labelledby="dropdownMenuButton1">
+                        <li style="overflow: hidden; text-overflow: ellipsis; margin-left: 10px; max-width: 200px;  height: 1.5em;"><b>{{Auth::user()->name}}</b></li>
+                        <li><a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a></li>
+                    </ul>
 
-{{--                        <button class="btn-orange"  aria-labelledby="dropdownMenuButton">--}}
-{{--                            <a href="{{ route('logout')}}" style="margin-left: 10px">Odhlásiť</a>--}}
-{{--                        </button>--}}
-                    </div>
+                </div>
                 @endif
             </div>
-            <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end">
+            <div class="col-12 col-md-2 mt-md-0 mt-3 text-center text-md-end d-none d-sm-block">
                 <button class="btn btn-orange py-1 me-md-1" onclick="location.href='{{route('cart.index')}}'" type="button">
                     <i class="fa fa-shopping-cart fa-lg h5"></i>
                     Košík

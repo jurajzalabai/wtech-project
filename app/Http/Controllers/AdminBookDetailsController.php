@@ -172,6 +172,13 @@ class AdminBookDetailsController extends Controller
 
     public function review(Request $request)
     {
+        $request->validate([
+            'review_author' => 'required',
+            'book_id' => 'required',
+            'review_description' => 'required',
+            'review_rating' => 'required|integer|between:1,5',
+        ]);
+
         $review = new Review([
                 "username" => $request->input('review_author'),
                 "book_id" => $request->input('book_id'),
@@ -192,18 +199,6 @@ class AdminBookDetailsController extends Controller
         $review->delete();
         return redirect()->back();
     }
-
-
-    // TODO validacia na vsetko
-
-    //TODO SIDE
-    //TODO description  - stranka od ada
-    //TODO description textarea cele zle - input
-    //TODO rozdelit javasript do osobitnych suborov
-    //TODO v navigacii pridat tlacidlo pre male obrazovky
-
-
-
 
     public function update(Request $request, $id)
     {
@@ -252,6 +247,6 @@ class AdminBookDetailsController extends Controller
         $book['category_id'] = $category_id;
         $book->save();
         $request->session()->flash('message', 'Kniha bola zmenená');
-        return redirect()->route('admin.index');
+        return redirect()->back();
     }
 }

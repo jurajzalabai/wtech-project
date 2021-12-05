@@ -25,7 +25,7 @@
         <div class="row book-main-info">
             <div class="d-flex justify-content-around py-5">
                     <label for="image" class="col-form-label">Pridaj fotku</label>
-                    <input type="file" class="form-control-file" id="image" name="image">
+                    <input type="file" class="form-control-file" id="image" name="image" value="{{old('image')}}">
             </div>
         </div>
         <div>
@@ -95,7 +95,7 @@
                         </select>
                         <br><br><br>
                         <label for="category">Zvoľte kategóriu:</label><br>
-                        <select>
+                        <select name="category" id="category">
                             @foreach($main_categories as $main_category)
                                 <option value="{{$main_category->name}}" selected>{{$main_category->name}}</option>
                             @endforeach

@@ -29,14 +29,14 @@
             <div class="price-filter">
                 <label for="price-min">Cena od</label>
                 <br>
-                <input type="number" name="minimal_price" id="price-min"
+                <input type="number" name="minimal_price" id="price-min" min="0"
                        @if(isset($request['minimal_price']))
                        value={{$request['minimal_price']}}
                     @endif>
                 <br>
                 <label for="price-max">Cena do</label>
                 <br>
-                <input type="number" name="maximum_price" id="price-max"
+                <input type="number" name="maximum_price" id="price-max" min="0"
                        @if(isset($request['maximum_price']))
                        value={{$request['maximum_price']}}
                     @endif>

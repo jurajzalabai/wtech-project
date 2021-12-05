@@ -152,7 +152,6 @@
         </div>
     </section>
     <script>
-        // document.getElementsByClassName("review-button").addEventListener("click", nieco);
         function change_text_button(){
             if (document.getElementById("show_reviews_button").innerText == "Zobraziť viac") {
                     document.getElementById("show_reviews_button").innerText = "Zobraziť menej";
@@ -161,27 +160,6 @@
                     document.getElementById("show_reviews_button").innerText = "Zobraziť viac";
                 }
         }
-
-        // function nieco(e) {
-            // console.log(ev.parent);
-
-            // var ev = e || window.event;
-            // console.log(ev);
-            // if ( ev.innerText === "Zobraziť viac"){
-            //     ev.parent.getElementsByTagName("p")[0].classList.remove("three-rows");
-            // }
-            // else{
-
-            // }
-            // if (document.getElementById("review").classList.item(1) == "three-rows") {
-            //     document.getElementById("review").classList.remove("three-rows");
-            //     document.getElementById("review_button").innerText = "Zobraziť menej";
-            // }
-            // else{
-            //     document.getElementById("review").classList.add("three-rows")
-            //     document.getElementById("review_button").innerText = "Zobraziť viac";
-            // }
-        // }
     </script>
 </main>
 @endsection
